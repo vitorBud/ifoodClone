@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - iFood Clone</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Barra de Navegação -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-logo">
+                <a href="index.html">
+                    <span class="logo-text">iFood</span>
+                    <span class="logo-clone">Clone</span>
+                </a>
+            </div>
+            
+            <div class="navbar-links">
+                <a href="register.html" class="nav-link">Criar conta</a>
+                <a href="checkout.html" class="nav-link cart-link">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Conteúdo Principal -->
+    <main class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <h1>Entrar</h1>
+                <p>Digite seus dados para acessar sua conta</p>
+            </div>
+            
+            <form id="login-form" class="auth-form">
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required>
+                    </div>
+                    <span class="error-message" id="email-error"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Senha</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
+                        <button type="button" class="toggle-password" aria-label="Mostrar senha">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <span class="error-message" id="password-error"></span>
+                </div>
+                
+                <div class="form-options">
+                    <label class="remember-me">
+                        <input type="checkbox" name="remember">
+                        <span>Lembrar de mim</span>
+                    </label>
+                    <a href="forgot-password.html" class="forgot-password">Esqueceu a senha?</a>
+                </div>
+                
+                <button type="submit" class="auth-button">Entrar</button>
+                
+                <div class="auth-divider">
+                    <span>ou</span>
+                </div>
+                
+                <button type="button" class="auth-social google">
+                    <img src="images/google-icon.png" alt="Google">
+                    <span>Entrar com Google</span>
+                </button>
+                
+                <button type="button" class="auth-social facebook">
+                    <img src="images/facebook-icon.png" alt="Facebook">
+                    <span>Entrar com Facebook</span>
+                </button>
+                
+                <div class="auth-footer">
+                    <p>Não tem uma conta? <a href="register.html">Cadastre-se</a></p>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Sobre Nós</h3>
+                <ul>
+                    <li><a href="#">Quem somos</a></li>
+                    <li><a href="#">Trabalhe conosco</a></li>
+                    <li><a href="#">Sustentabilidade</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Para Restaurantes</h3>
+                <ul>
+                    <li><a href="#">Cadastre seu restaurante</a></li>
+                    <li><a href="#">iFood Partner</a></li>
+                    <li><a href="#">Soluções para entregadores</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Social</h3>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Baixe nosso app</h3>
+                <div class="app-download">
+                    <a href="#"><img src="images/google-play.png" alt="Google Play"></a>
+                    <a href="#"><img src="images/app-store.png" alt="App Store"></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 iFood Clone. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Modal de Sucesso -->
+    <div class="auth-modal" id="success-modal">
+        <div class="modal-content">
+            <div class="modal-icon success">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h3>Login realizado com sucesso!</h3>
+            <p>Você será redirecionado em breve.</p>
+            <button class="modal-button" onclick="window.location.href='index.html'">Ok</button>
+        </div>
+    </div>
+
+    <!-- Modal de Erro -->
+    <div class="auth-modal" id="error-modal">
+        <div class="modal-content">
+            <div class="modal-icon error">
+                <i class="fas fa-times-circle"></i>
+            </div>
+            <h3>Erro ao fazer login</h3>
+            <p id="error-message">E-mail ou senha incorretos.</p>
+            <button class="modal-button" id="close-error">Tentar novamente</button>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/cart.js"></script>
+</body>
+</html>

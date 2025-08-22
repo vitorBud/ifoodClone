@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finalizar Pedido - iFood Clone</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Barra de Navegação -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-logo">
+                <a href="index.html">
+                    <span class="logo-text">iFood</span>
+                    <span class="logo-clone">Clone</span>
+                </a>
+            </div>
+            
+            <div class="navbar-links">
+                <a href="#" class="nav-link"><i class="fas fa-user"></i> Entrar</a>
+                <a href="#" class="nav-link cart-link">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Conteúdo do Checkout -->
+    <main class="checkout-container">
+        <div class="checkout-steps">
+            <div class="step active">
+                <span class="step-number">1</span>
+                <span class="step-title">Endereço</span>
+            </div>
+            <div class="step">
+                <span class="step-number">2</span>
+                <span class="step-title">Pagamento</span>
+            </div>
+            <div class="step">
+                <span class="step-number">3</span>
+                <span class="step-title">Revisão</span>
+            </div>
+        </div>
+        
+        <div class="checkout-content">
+            <div class="checkout-form">
+                <h2>Endereço de Entrega</h2>
+                <form id="address-form">
+                    <div class="form-group">
+                        <label for="cep">CEP</label>
+                        <input type="text" id="cep" name="cep" placeholder="Digite seu CEP">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="street">Rua</label>
+                            <input type="text" id="street" name="street" placeholder="Nome da rua">
+                        </div>
+                        <div class="form-group">
+                            <label for="number">Número</label>
+                            <input type="text" id="number" name="number" placeholder="Número">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="complement">Complemento (opcional)</label>
+                        <input type="text" id="complement" name="complement" placeholder="Apto, bloco, etc.">
+                    </div>
+                    <div class="form-group">
+                        <label for="neighborhood">Bairro</label>
+                        <input type="text" id="neighborhood" name="neighborhood" placeholder="Bairro">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="city">Cidade</label>
+                            <input type="text" id="city" name="city" placeholder="Cidade">
+                        </div>
+                        <div class="form-group">
+                            <label for="state">Estado</label>
+                            <select id="state" name="state">
+                                <option value="">Selecione</option>
+                                <option value="SP">São Paulo</option>
+                                <option value="RJ">Rio de Janeiro</option>
+                                <!-- Outros estados -->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="reference">Ponto de referência (opcional)</label>
+                        <input type="text" id="reference" name="reference" placeholder="Ex: Próximo ao mercado">
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="back-button">Voltar</button>
+                        <button type="submit" class="continue-button">Continuar</button>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="order-summary">
+                <h3>Resumo do Pedido</h3>
+                <div class="restaurant-info">
+                    <img src="images/restaurant1-logo.jpg" alt="Burger King" class="restaurant-logo">
+                    <h4>Burger King</h4>
+                    <p class="delivery-time">30-40 min</p>
+                </div>
+                
+                <div class="order-items">
+                    <div class="order-item">
+                        <span class="item-quantity">1x</span>
+                        <span class="item-name">Whopper</span>
+                        <span class="item-price">R$ 19,90</span>
+                    </div>
+                    <div class="order-item">
+                        <span class="item-quantity">1x</span>
+                        <span class="item-name">Cheeseburger</span>
+                        <span class="item-price">R$ 12,90</span>
+                    </div>
+                </div>
+                
+                <div class="order-totals">
+                    <div class="total-row">
+                        <span>Subtotal</span>
+                        <span>R$ 32,80</span>
+                    </div>
+                    <div class="total-row">
+                        <span>Taxa de entrega</span>
+                        <span>R$ 5,90</span>
+                    </div>
+                    <div class="total-row discount">
+                        <span>Desconto</span>
+                        <span>- R$ 3,28</span>
+                    </div>
+                    <div class="total-row grand-total">
+                        <span>Total</span>
+                        <span>R$ 35,42</span>
+                    </div>
+                </div>
+                
+                <div class="coupon-section">
+                    <input type="text" placeholder="Cupom de desconto">
+                    <button>Aplicar</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Sobre Nós</h3>
+                <ul>
+                    <li><a href="#">Quem somos</a></li>
+                    <li><a href="#">Trabalhe conosco</a></li>
+                    <li><a href="#">Sustentabilidade</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Para Restaurantes</h3>
+                <ul>
+                    <li><a href="#">Cadastre seu restaurante</a></li>
+                    <li><a href="#">iFood Partner</a></li>
+                    <li><a href="#">Soluções para entregadores</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Social</h3>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 iFood Clone. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/cart.js"></script>
+</body>
+</html>

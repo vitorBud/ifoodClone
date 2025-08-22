@@ -1,0 +1,154 @@
+/* Estilos específicos para responsividade */
+
+@media (max-width: 1200px) {
+    .navbar-container, 
+    .categories, 
+    .featured, 
+    .offers, 
+    .footer-container,
+    .restaurant-info-container,
+    .restaurant-menu,
+    .reviews,
+    .checkout-container {
+        padding: 0 15px;
+    }
+}
+
+@media (max-width: 992px) {
+    /* Ajustes para tablets */
+    .navbar-search {
+        margin: 0 10px;
+    }
+    
+    .restaurant-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .menu-container {
+        flex-direction: column;
+    }
+    
+    .menu-sidebar {
+        width: 100%;
+        position: static;
+    }
+    
+    .checkout-content {
+        flex-direction: column;
+    }
+    
+    .order-summary {
+        width: 100%;
+        margin-top: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Ajustes para tablets pequenos e celulares grandes */
+    .navbar-container {
+        flex-wrap: wrap;
+    }
+    
+    .navbar-search {
+        order: 3;
+        flex: 1 100%;
+        margin: 10px 0 0;
+    }
+    
+    .restaurant-info {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .restaurant-logo {
+        margin: 0 auto 15px;
+    }
+    
+    .form-row {
+        flex-direction: column;
+    }
+    
+    .form-row .form-group {
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    /* Ajustes para celulares */
+    .category-list {
+        padding-bottom: 15px;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+    }
+    
+    .category-item {
+        scroll-snap-align: start;
+    }
+    
+    .restaurant-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .offer-slide {
+        flex-direction: column;
+        height: auto;
+    }
+    
+    .offer-slide img {
+        width: 100%;
+        height: 150px;
+    }
+    
+    .offer-details {
+        padding: 15px;
+    }
+    
+    .cart-content {
+        width: 100%;
+    }
+    
+    .checkout-steps .step {
+        padding: 0 15px;
+    }
+    
+    .checkout-steps .step:not(:last-child):after {
+        width: 15px;
+        right: -7px;
+    }
+    
+    .floating-cart {
+        bottom: 20px;
+        right: 20px;
+        padding: 12px 15px;
+    }
+}
+
+@media (max-width: 400px) {
+    /* Ajustes para celulares muito pequenos */
+    .navbar-links {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .nav-link {
+        margin: 0;
+    }
+    
+    .checkout-steps .step {
+        padding: 0 10px;
+    }
+    
+    .step-title {
+        font-size: 12px;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .back-button, .continue-button {
+        width: 100%;
+        text-align: center;
+    }
+}

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iFood Clone - Delivery de Comida Online</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Barra de Navegação -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-logo">
+                <a href="index.html">
+                    <span class="logo-text">iFood</span>
+                    <span class="logo-clone">Clone</span>
+                </a>
+            </div>
+            
+            <div class="navbar-search">
+                <input type="text" placeholder="Buscar restaurante ou comida...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+            
+            <div class="navbar-links">
+                <a href="login.html" class="nav-link"><i class="fas fa-user"></i> Entrar</a>
+                <a href="checkout.html" class="nav-link cart-link">
+                    <i class="fas fa-shopping-cart"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Categorias -->
+    <section class="categories">
+        <h2>Categorias</h2>
+        <div class="category-list">
+            <div class="category-item">
+                <div class="category-icon" style="background-color: #FF6B6B;">
+                    <i class="fas fa-hamburger"></i>
+                </div>
+                <span>Lanches</span>
+            </div>
+            <div class="category-item">
+                <div class="category-icon" style="background-color: #4ECDC4;">
+                    <i class="fas fa-pizza-slice"></i>
+                </div>
+                <span>Pizza</span>
+            </div>
+            <div class="category-item">
+                <div class="category-icon" style="background-color: #45B7D1;">
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <span>Japonesa</span>
+            </div>
+            <div class="category-item">
+                <div class="category-icon" style="background-color: #FFBE0B;">
+                    <i class="fas fa-drumstick-bite"></i>
+                </div>
+                <span>Frango</span>
+            </div>
+            <div class="category-item">
+                <div class="category-icon" style="background-color: #FF9F1C;">
+                    <i class="fas fa-ice-cream"></i>
+                </div>
+                <span>Sorvetes</span>
+            </div>
+            <div class="category-item">
+                <div class="category-icon" style="background-color: #8AC926;">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <span>Vegetariana</span>
+            </div>
+            <div class="category-item">
+                <div class="category-icon" style="background-color: #6A4C93;">
+                    <i class="fas fa-wine-glass-alt"></i>
+                </div>
+                <span>Bebidas</span>
+            </div>
+            <div class="category-item">
+                <div class="category-icon" style="background-color: #F15BB5;">
+                    <i class="fas fa-birthday-cake"></i>
+                </div>
+                <span>Doces</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Destaques -->
+    <section class="featured">
+        <h2>Restaurantes em Destaque</h2>
+        <div class="restaurant-grid">
+            <!-- Restaurante 1 -->
+             <a href="restaurant.html">
+            <div class="restaurant-card">
+                <div class="restaurant-image" style="background-image: url('images/restaurant1.jpg');">
+                    <span class="rating">4.8 <i class="fas fa-star"></i></span>
+                </div>
+
+                <div class="restaurant-info">
+                    <h3>Burger King</h3>
+                    <p class="cuisine">Lanches • Americana</p>
+                    <p class="delivery-fee">Taxa de entrega: R$ 5,90</p>
+                    <p class="min-order">Mínimo: R$ 15,00</p>
+                </div>
+            </div>
+            </a>
+
+
+            
+            <!-- Restaurante 2 -->
+            <div class="restaurant-card">
+                <div class="restaurant-image" style="background-image: url('images/restaurant2.jpg');">
+                    <span class="delivery-time">40-50 min</span>
+                    <span class="rating">4.7 <i class="fas fa-star"></i></span>
+                </div>
+                <div class="restaurant-info">
+                    <h3>Pizza Hut</h3>
+                    <p class="cuisine">Pizza • Italiana</p>
+                    <p class="delivery-fee">Taxa de entrega: R$ 7,90</p>
+                    <p class="min-order">Mínimo: R$ 20,00</p>
+                </div>
+            </div>
+            
+
+
+            <!-- Restaurante 3 -->
+            <div class="restaurant-card">
+                <div class="restaurant-image" style="background-image: url('images/restaurant3.jpg');">
+                    <span class="delivery-time">35-45 min</span>
+                    <span class="rating">4.9 <i class="fas fa-star"></i></span>
+                </div>
+                <div class="restaurant-info">
+                    <h3>Sushi Place</h3>
+                    <p class="cuisine">Japonesa • Sushi</p>
+                    <p class="delivery-fee">Taxa de entrega: R$ 8,90</p>
+                    <p class="min-order">Mínimo: R$ 25,00</p>
+                </div>
+            </div>
+
+
+            
+            <!-- Restaurante 4 -->
+            <div class="restaurant-card">
+                <div class="restaurant-image" style="background-image: url('images/restaurant4.jpg');">
+                    <span class="delivery-time">25-35 min</span>
+                    <span class="rating">4.5 <i class="fas fa-star"></i></span>
+                </div>
+                <div class="restaurant-info">
+                    <h3>McDonald's</h3>
+                    <p class="cuisine">Lanches • Fast Food</p>
+                    <p class="delivery-fee">Taxa de entrega: R$ 4,90</p>
+                    <p class="min-order">Mínimo: R$ 12,00</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Ofertas Especiais -->
+    <section class="offers">
+        <h2>Ofertas Especiais</h2>
+        <div class="offer-slider">
+            <div class="offer-slide">
+                <img src="images/offer1.jpg" alt="Oferta 1">
+                <div class="offer-details">
+                    <h3>Combo Família</h3>
+                    <p>2 Pizzas Grandes + Refri 2L por apenas R$ 79,90</p>
+                    <button class="offer-button">Pedir Agora</button>
+                </div>
+            </div>
+            <div class="offer-slide">
+                <img src="images/offer2.jpg" alt="Oferta 2">
+                <div class="offer-details">
+                    <h3>Lanche Duplo</h3>
+                    <p>2 Hambúrgueres + Batata + Refri por R$ 29,90</p>
+                    <button class="offer-button">Pedir Agora</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Rodapé -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Sobre Nós</h3>
+                <ul>
+                    <li><a href="#">Quem somos</a></li>
+                    <li><a href="#">Trabalhe conosco</a></li>
+                    <li><a href="#">Sustentabilidade</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Para Restaurantes</h3>
+                <ul>
+                    <li><a href="#">Cadastre seu restaurante</a></li>
+                    <li><a href="#">iFood Partner</a></li>
+                    <li><a href="#">Soluções para entregadores</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Social</h3>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Baixe nosso app</h3>
+                <div class="app-download">
+                    <a href="#"><img src="images/google-play.png" alt="Google Play"></a>
+                    <a href="#"><img src="images/app-store.png" alt="App Store"></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 iFood Clone. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Carrinho Flutuante -->
+    <div class="floating-cart">
+        <div class="cart-icon">
+            <i class="fas fa-shopping-cart"></i>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script src="js/cart.js"></script>
+</body>
+</html>

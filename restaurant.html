@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Burger King - iFood Clone</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Barra de Navegação -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-logo">
+                <a href="index.html">
+                    <span class="logo-text">iFood</span>
+                    <span class="logo-clone">Clone</span>
+                </a>
+            </div>
+            
+            <div class="navbar-search">
+                <input type="text" placeholder="Buscar restaurante ou comida...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+            
+            <div class="navbar-links">
+                <a href="login.html" class="nav-link"><i class="fas fa-user"></i> Entrar</a>
+                <a href="#" class="nav-link cart-link">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Cabeçalho do Restaurante -->
+    <header class="restaurant-header">
+        <div class="restaurant-cover" style="background-image: url('images/restaurant1.jpg');"></div>
+        <div class="restaurant-info-container">
+            <div class="restaurant-info">
+                <div class="restaurant-logo" style="background-image: url('images/restaurant1-logo.jpg');"></div>
+                <div class="restaurant-details">
+                    <h1>Burger King</h1>
+                    <div class="restaurant-meta">
+                        <span class="rating">4.8 <i class="fas fa-star"></i></span>
+                        <span class="delivery-time">30-40 min</span>
+                        <span class="category">Lanches • Americana</span>
+                    </div>
+                    <p class="address">Av. Paulista, 1000 - São Paulo, SP</p>
+                </div>
+            </div>
+            <div class="restaurant-promo">
+                <div class="promo-banner">
+                    <i class="fas fa-percentage"></i>
+                    <span>10% OFF no pedido mínimo de R$ 30,00 com cupom BK10</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Menu do Restaurante -->
+    <section class="restaurant-menu">
+        <div class="menu-container">
+            <div class="menu-sidebar">
+                <h3>Categorias</h3>
+                <ul class="menu-categories">
+                    <li class="active"><a href="#burgers">Burgers</a></li>
+                    <li><a href="#combos">Combos</a></li>
+                    <li><a href="#bebidas">Bebidas</a></li>
+                    <li><a href="#sobremesas">Sobremesas</a></li>
+                </ul>
+            </div>
+            
+            <div class="menu-items">
+                <div class="menu-section" id="burgers">
+                    <h2>Burgers</h2>
+                    
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h3>Whopper</h3>
+                            <p class="item-description">Pão com gergelim, hambúrguer de carne 100% bovina, queijo, alface, tomate, maionese, ketchup, picles e cebola.</p>
+                            <p class="item-price">R$ 19,90</p>
+                        </div>
+                        <div class="item-add">
+                            <img src="images/whopper.jpg" alt="Whopper" class="item-image">
+                            <button class="add-to-cart" data-id="1" data-name="Whopper" data-price="19.90">Adicionar</button>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h3>Cheeseburger</h3>
+                            <p class="item-description">Pão, hambúrguer de carne 100% bovina, queijo derretido, picles, ketchup e mostarda.</p>
+                            <p class="item-price">R$ 12,90</p>
+                        </div>
+                        <div class="item-add">
+                            <img src="images/cheeseburger.jpg" alt="Cheeseburger" class="item-image">
+                            <button class="add-to-cart" data-id="2" data-name="Cheeseburger" data-price="12.90">Adicionar</button>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h3>Bacon King</h3>
+                            <p class="item-description">Dois hambúrgueres de carne 100% bovina, queijo, bacon crocante, ketchup e maionese no pão com gergelim.</p>
+                            <p class="item-price">R$ 24,90</p>
+                        </div>
+                        <div class="item-add">
+                            <img src="images/bacon-king.jpg" alt="Bacon King" class="item-image">
+                            <button class="add-to-cart" data-id="3" data-name="Bacon King" data-price="24.90">Adicionar</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="menu-section" id="combos">
+                    <h2>Combos</h2>
+                    
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h3>Combo Whopper</h3>
+                            <p class="item-description">Whopper + Batata Média + Refri 500ml</p>
+                            <p class="item-price">R$ 29,90</p>
+                            <p class="item-save">Economize R$ 5,00</p>
+                        </div>
+                        <div class="item-add">
+                            <img src="images/combo-whopper.jpg" alt="Combo Whopper" class="item-image">
+                            <button class="add-to-cart" data-id="4" data-name="Combo Whopper" data-price="29.90">Adicionar</button>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h3>Combo Duplo Cheese</h3>
+                            <p class="item-description">2 Cheeseburgers + Batata Pequena + Refri 300ml</p>
+                            <p class="item-price">R$ 22,90</p>
+                            <p class="item-save">Economize R$ 3,00</p>
+                        </div>
+                        <div class="item-add">
+                            <img src="images/combo-duplo.jpg" alt="Combo Duplo Cheese" class="item-image">
+                            <button class="add-to-cart" data-id="5" data-name="Combo Duplo Cheese" data-price="22.90">Adicionar</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="menu-section" id="bebidas">
+                    <h2>Bebidas</h2>
+                    
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h3>Refrigerante 500ml</h3>
+                            <p class="item-description">Coca-Cola, Guaraná, Fanta ou Sprite.</p>
+                            <p class="item-price">R$ 8,90</p>
+                        </div>
+                        <div class="item-add">
+                            <img src="images/refrigerante.jpg" alt="Refrigerante" class="item-image">
+                            <button class="add-to-cart" data-id="6" data-name="Refrigerante 500ml" data-price="8.90">Adicionar</button>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h3>Suco Natural 300ml</h3>
+                            <p class="item-description">Laranja, Limão ou Uva.</p>
+                            <p class="item-price">R$ 7,50</p>
+                        </div>
+                        <div class="item-add">
+                            <img src="images/suco.jpg" alt="Suco Natural" class="item-image">
+                            <button class="add-to-cart" data-id="7" data-name="Suco Natural 300ml" data-price="7.50">Adicionar</button>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h3>Água Mineral 500ml</h3>
+                            <p class="item-description">Água mineral sem gás.</p>
+                            <p class="item-price">R$ 4,50</p>
+                        </div>
+                        <div class="item-add">
+                            <img src="images/agua.jpg" alt="Água Mineral" class="item-image">
+                            <button class="add-to-cart" data-id="8" data-name="Água Mineral 500ml" data-price="4.50">Adicionar</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="menu-section" id="sobremesas">
+                    <h2>Sobremesas</h2>
+                    
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h3>Sundae Chocolate</h3>
+                            <p class="item-description">Sorvete de baunilha com cobertura de chocolate.</p>
+                            <p class="item-price">R$ 9,90</p>
+                        </div>
+                        <div class="item-add">
+                            <img src="images/sundae.jpg" alt="Sundae Chocolate" class="item-image">
+                            <button class="add-to-cart" data-id="9" data-name="Sundae Chocolate" data-price="9.90">Adicionar</button>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h3>Apple Pie</h3>
+                            <p class="item-description">Torta de maçã crocante.</p>
+                            <p class="item-price">R$ 7,90</p>
+                        </div>
+                        <div class="item-add">
+                            <img src="images/apple-pie.jpg" alt="Apple Pie" class="item-image">
+                            <button class="add-to-cart" data-id="10" data-name="Apple Pie" data-price="7.90">Adicionar</button>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h3>Milkshake Chocolate</h3>
+                            <p class="item-description">Milkshake cremoso de chocolate com chantilly.</p>
+                            <p class="item-price">R$ 12,90</p>
+                        </div>
+                        <div class="item-add">
+                            <img src="images/milkshake.jpg" alt="Milkshake Chocolate" class="item-image">
+                            <button class="add-to-cart" data-id="11" data-name="Milkshake Chocolate" data-price="12.90">Adicionar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Avaliações -->
+    <section class="reviews">
+        <h2>Avaliações</h2>
+        <div class="review-container">
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="reviewer">
+                        <div class="reviewer-avatar">J</div>
+                        <div class="reviewer-info">
+                            <h4>João Silva</h4>
+                            <span class="review-date">12/05/2023</span>
+                        </div>
+                    </div>
+                    <div class="review-rating">
+                        <span>4.5</span>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                <div class="review-content">
+                    <p>O Whopper é incrível! Sempre peço quando estou com fome. A entrega foi rápida e o lanche veio quentinho.</p>
+                </div>
+            </div>
+            
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="reviewer">
+                        <div class="reviewer-avatar">M</div>
+                        <div class="reviewer-info">
+                            <h4>Maria Souza</h4>
+                            <span class="review-date">28/04/2023</span>
+                        </div>
+                    </div>
+                    <div class="review-rating">
+                        <span>5.0</span>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                <div class="review-content">
+                    <p>Melhor hambúrguer da região! O Bacon King é perfeito, com muito bacon crocante. Recomendo demais!</p>
+                </div>
+            </div>
+            
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="reviewer">
+                        <div class="reviewer-avatar">C</div>
+                        <div class="reviewer-info">
+                            <h4>Carlos Oliveira</h4>
+                            <span class="review-date">15/05/2023</span>
+                        </div>
+                    </div>
+                    <div class="review-rating">
+                        <span>4.0</span>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                <div class="review-content">
+                    <p>O lanche veio bem quente e rápido. Só achei que poderia ter mais molho.</p>
+                </div>
+            </div>
+            
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="reviewer">
+                        <div class="reviewer-avatar">A</div>
+                        <div class="reviewer-info">
+                            <h4>Ana Beatriz</h4>
+                            <span class="review-date">02/05/2023</span>
+                        </div>
+                    </div>
+                    <div class="review-rating">
+                        <span>5.0</span>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                <div class="review-content">
+                    <p>Adoro o Whopper! Sempre peço quando estou com muita fome. Entrega sempre dentro do prazo.</p>
+                </div>
+            </div>
+        </div>
+        <button class="see-all-reviews">Ver todas as avaliações</button>
+    </section>
+
+    <!-- Rodapé -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Sobre Nós</h3>
+                <ul>
+                    <li><a href="#">Quem somos</a></li>
+                    <li><a href="#">Trabalhe conosco</a></li>
+                    <li><a href="#">Sustentabilidade</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Para Restaurantes</h3>
+                <ul>
+                    <li><a href="#">Cadastre seu restaurante</a></li>
+                    <li><a href="#">iFood Partner</a></li>
+                    <li><a href="#">Soluções para entregadores</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Social</h3>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Baixe nosso app</h3>
+                <div class="app-download">
+                    <a href="#"><img src="images/google-play.png" alt="Google Play"></a>
+                    <a href="#"><img src="images/app-store.png" alt="App Store"></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 iFood Clone. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Carrinho de Compras Modal -->
+    <div class="cart-modal">
+        <div class="cart-content">
+            <div class="cart-header">
+                <h3>Seu Carrinho</h3>
+                <button class="close-cart">&times;</button>
+            </div>
+            <div class="cart-items">
+                <!-- Itens serão adicionados dinamicamente aqui -->
+            </div>
+            <div class="cart-summary">
+                <div class="cart-totals">
+                    <div class="subtotal">
+                        <span>Subtotal</span>
+                        <span class="subtotal-amount">R$ 0,00</span>
+                    </div>
+                    <div class="delivery-fee">
+                        <span>Taxa de entrega</span>
+                        <span class="delivery-amount">R$ 5,90</span>
+                    </div>
+                    <div class="total">
+                        <span>Total</span>
+                        <span class="total-amount">R$ 5,90</span>
+                    </div>
+                </div>
+                <button class="checkout-button">Finalizar Pedido</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Carrinho Flutuante -->
+    <div class="floating-cart">
+        <div class="cart-icon">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-badge">0</span>
+        </div>
+        <div class="cart-total">R$ 0,00</div>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/restaurant.js"></script>
+</body>
+</html>
