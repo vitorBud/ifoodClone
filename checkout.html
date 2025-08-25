@@ -19,8 +19,8 @@
             </div>
             
             <div class="navbar-links">
-                <a href="#" class="nav-link"><i class="fas fa-user"></i> Entrar</a>
-                <a href="#" class="nav-link cart-link">
+                <a href="login.html" class="nav-link"><i class="fas fa-user"></i> Entrar</a>
+                <a href="checkout.html" class="nav-link cart-link">
                     <i class="fas fa-shopping-cart"></i>
                     <span class="cart-count">0</span>
                 </a>
@@ -30,122 +30,143 @@
 
     <!-- Conteúdo do Checkout -->
     <main class="checkout-container">
-        <div class="checkout-steps">
-            <div class="step active">
-                <span class="step-number">1</span>
-                <span class="step-title">Endereço</span>
-            </div>
-            <div class="step">
-                <span class="step-number">2</span>
-                <span class="step-title">Pagamento</span>
-            </div>
-            <div class="step">
-                <span class="step-number">3</span>
-                <span class="step-title">Revisão</span>
-            </div>
-        </div>
-        
-        <div class="checkout-content">
-            <div class="checkout-form">
-                <h2>Endereço de Entrega</h2>
-                <form id="address-form">
-                    <div class="form-group">
-                        <label for="cep">CEP</label>
-                        <input type="text" id="cep" name="cep" placeholder="Digite seu CEP">
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="street">Rua</label>
-                            <input type="text" id="street" name="street" placeholder="Nome da rua">
-                        </div>
-                        <div class="form-group">
-                            <label for="number">Número</label>
-                            <input type="text" id="number" name="number" placeholder="Número">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="complement">Complemento (opcional)</label>
-                        <input type="text" id="complement" name="complement" placeholder="Apto, bloco, etc.">
-                    </div>
-                    <div class="form-group">
-                        <label for="neighborhood">Bairro</label>
-                        <input type="text" id="neighborhood" name="neighborhood" placeholder="Bairro">
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="city">Cidade</label>
-                            <input type="text" id="city" name="city" placeholder="Cidade">
-                        </div>
-                        <div class="form-group">
-                            <label for="state">Estado</label>
-                            <select id="state" name="state">
-                                <option value="">Selecione</option>
-                                <option value="SP">São Paulo</option>
-                                <option value="RJ">Rio de Janeiro</option>
-                                <!-- Outros estados -->
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="reference">Ponto de referência (opcional)</label>
-                        <input type="text" id="reference" name="reference" placeholder="Ex: Próximo ao mercado">
-                    </div>
-                    <div class="form-actions">
-                        <button type="button" class="back-button">Voltar</button>
-                        <button type="submit" class="continue-button">Continuar</button>
-                    </div>
-                </form>
-            </div>
-            
-            <div class="order-summary">
-                <h3>Resumo do Pedido</h3>
-                <div class="restaurant-info">
-                    <img src="images/restaurant1-logo.jpg" alt="Burger King" class="restaurant-logo">
-                    <h4>Burger King</h4>
-                    <p class="delivery-time">30-40 min</p>
-                </div>
-                
-                <div class="order-items">
-                    <div class="order-item">
-                        <span class="item-quantity">1x</span>
-                        <span class="item-name">Whopper</span>
-                        <span class="item-price">R$ 19,90</span>
-                    </div>
-                    <div class="order-item">
-                        <span class="item-quantity">1x</span>
-                        <span class="item-name">Cheeseburger</span>
-                        <span class="item-price">R$ 12,90</span>
-                    </div>
-                </div>
-                
-                <div class="order-totals">
-                    <div class="total-row">
-                        <span>Subtotal</span>
-                        <span>R$ 32,80</span>
-                    </div>
-                    <div class="total-row">
-                        <span>Taxa de entrega</span>
-                        <span>R$ 5,90</span>
-                    </div>
-                    <div class="total-row discount">
-                        <span>Desconto</span>
-                        <span>- R$ 3,28</span>
-                    </div>
-                    <div class="total-row grand-total">
-                        <span>Total</span>
-                        <span>R$ 35,42</span>
-                    </div>
-                </div>
-                
-                <div class="coupon-section">
-                    <input type="text" placeholder="Cupom de desconto">
-                    <button>Aplicar</button>
-                </div>
-            </div>
-        </div>
-    </main>
+  <!-- Indicador de passos (mantido) -->
+  <div class="checkout-steps">
+    <div class="step active" data-step="1">
+      <span class="step-number">1</span>
+      <span class="step-title">Endereço</span>
+    </div>
+    <div class="step" data-step="2">
+      <span class="step-number">2</span>
+      <span class="step-title">Pagamento</span>
+    </div>
+    <div class="step" data-step="3">
+      <span class="step-number">3</span>
+      <span class="step-title">Revisão</span>
+    </div>
+  </div>
 
-    <!-- Rodapé -->
+  <!-- Carrossel -->
+  <div class="checkout-carousel" style="position:relative;overflow:hidden">
+    <div class="carousel-track" style="display:flex;transition:transform .35s ease;will-change:transform">
+      <!-- Slide 1: Endereço -->
+      <section class="checkout-form slide" data-step="1" style="min-width:100%">
+        <h2>Endereço de Entrega</h2>
+        <form id="address-form">
+          <div class="form-group">
+            <label for="cep">CEP</label>
+            <input type="text" id="cep" name="cep" placeholder="Digite seu CEP" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="street">Rua</label>
+              <input type="text" id="street" name="street" required>
+            </div>
+            <div class="form-group">
+              <label for="number">Número</label>
+              <input type="text" id="number" name="number" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="complement">Complemento (opcional)</label>
+            <input type="text" id="complement" name="complement">
+          </div>
+          <div class="form-group">
+            <label for="neighborhood">Bairro</label>
+            <input type="text" id="neighborhood" name="neighborhood" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="city">Cidade</label>
+              <input type="text" id="city" name="city" required>
+            </div>
+            <div class="form-group">
+              <label for="state">Estado</label>
+              <select id="state" name="state" required>
+                <option value="">Selecione</option>
+                <option value="SP">São Paulo</option>
+                <option value="RJ">Rio de Janeiro</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="button" class="continue-button" data-next="2">Continuar</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Slide 2: Pagamento -->
+      <section class="checkout-form slide" data-step="2" style="min-width:100%">
+        <h2>Pagamento</h2>
+        <form id="payment-form">
+          <div class="form-group">
+            <label for="card-name">Nome no Cartão</label>
+            <input type="text" id="card-name" required>
+          </div>
+          <div class="form-group">
+            <label for="card-number">Número do Cartão</label>
+            <input type="text" id="card-number" maxlength="19" placeholder="0000 0000 0000 0000" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="card-expiry">Validade</label>
+              <input type="text" id="card-expiry" placeholder="MM/AA" required>
+            </div>
+            <div class="form-group">
+              <label for="card-cvv">CVV</label>
+              <input type="password" id="card-cvv" maxlength="4" required>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="button" class="back-button" data-prev="1">Voltar</button>
+            <button type="button" class="continue-button" data-next="3">Continuar</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Slide 3: Revisão -->
+      <section class="checkout-form slide" data-step="3" style="min-width:100%">
+        <h2>Revisão do Pedido</h2>
+        <div class="order-summary">
+          <h3>Resumo do Pedido</h3>
+          <div class="restaurant-info">
+            <img src="images/restaurant1-logo.jpg"
+            class="restaurant-logo"
+            id="rev-restaurant-logo"
+            alt=""
+            onerror="this.onerror=null;this.src='images/placeholder.png'">
+
+            <h4 id="rev-restaurant-name">Restaurante</h4>
+            <p class="delivery-time" id="rev-delivery-time">--</p>
+          </div>
+          <div class="order-items"></div>
+          <div class="order-totals"></div>
+          <div class="coupon-section">
+            <input type="text" id="coupon-input" placeholder="Cupom de desconto">
+            <button type="button" id="apply-coupon">Aplicar</button>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="button" class="back-button" data-prev="2">Voltar</button>
+          <button type="button" id="confirm-order" class="continue-button">Confirmar Pedido</button>
+        </div>
+      </section>
+    </div>
+
+    <!-- Controles do carrossel -->
+    <button class="carousel-prev" aria-label="Anterior" style="position:absolute;left:8px;top:50%;transform:translateY(-50%);">‹</button>
+    <button class="carousel-next" aria-label="Próximo" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);">›</button>
+
+    <div class="carousel-dots" style="display:flex;gap:8px;justify-content:center;margin-top:12px;">
+      <button class="dot active" data-step="1" aria-label="Ir para Etapa 1">●</button>
+      <button class="dot" data-step="2" aria-label="Ir para Etapa 2">●</button>
+      <button class="dot" data-step="3" aria-label="Ir para Etapa 3">●</button>
+    </div>
+  </div>
+</main>
+
+
+    <!-- Rodapé (mantido) -->
     <footer class="footer">
         <div class="footer-container">
             <div class="footer-section">
@@ -178,7 +199,22 @@
         </div>
     </footer>
 
-    <script src="js/script.js"></script>
-    <script src="js/cart.js"></script>
+   
+    <script>
+
+        window.SUPABASE_URL = "https://epzgwoujykafwgrvhtbf.supabase.co'";   
+        window.SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVwemd3b3VqeWthZndncnZodGJmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTYxMjkzNzIsImV4cCI6MjA3MTcwNTM3Mn0.beGx4fJ70KarCaYTL7iHxbIqPwq6o4kW9uI_39ixEe4";                 // troque
+
+    </script>
+
+  
+    <script>
+        document.addEventListener('error', (e) => {
+            const t = e.target;
+            if (t.tagName === 'IMG') t.src = 'images/placeholder.png';
+        }, true);
+    </script>
+
+    <script type="module" src="js/checkout.js"></script>
 </body>
 </html>
