@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Área do Funcionário - iFood Clone</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    .staff-wrapper{max-width:980px;margin:24px auto;padding:16px}
+    .auth-card,.panel-card{background:#fff;border-radius:16px;box-shadow:0 8px 24px rgba(0,0,0,.08);padding:20px}
+    .grid{display:grid;gap:16px}
+    .grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .muted{opacity:.8}
+    .item-card{display:grid;grid-template-columns:120px 1fr;gap:16px;align-items:center;border:1px solid #eee;border-radius:12px;padding:12px}
+    .item-card img{width:120px;height:90px;object-fit:cover;border-radius:10px;background:#f2f2f2}
+    .row{display:flex;gap:8px;flex-wrap:wrap}
+    .row input[type="text"], .row input[type="number"]{padding:10px;border:1px solid #ddd;border-radius:8px}
+    .row input[type="file"]{max-width:320px}
+    .row button{padding:10px 14px;border:0;border-radius:10px;background:#e21; color:#fff; cursor:pointer}
+    .row button.secondary{background:#555}
+    .row button:disabled{opacity:.6;cursor:not-allowed}
+    .topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+    .error{color:#b00020;margin:8px 0}
+    .success{color:#0a7b34;margin:8px 0}
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-container">
+      <div class="navbar-logo">
+        <a href="index.html">
+          <span class="logo-text">iFood</span><span class="logo-clone">Clone</span>
+        </a>
+      </div>
+      <div class="navbar-links">
+        <a href="restaurant.html" class="nav-link">Restaurante</a>
+        <a href="checkout.html" class="nav-link">Checkout</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="staff-wrapper">
+    <!-- AUTENTICAÇÃO -->
+    <section id="auth" class="auth-card">
+      <h2>Área do Funcionário</h2>
+      <p class="muted">Cadastre-se ou entre para gerenciar nome e foto dos itens.</p>
+
+      <div class="grid grid-2">
+        <div>
+          <h3>Cadastrar</h3>
+          <div class="grid">
+            <input id="su-email" type="email" placeholder="Email"/>
+            <input id="su-password" type="password" placeholder="Senha (min 6)"/>
+            <input id="su-restaurant" type="text" placeholder="Slug do restaurante (ex: rest_bk)"/>
+            <button id="btn-signup">Criar conta</button>
+            <div id="su-msg" class="muted"></div>
+          </div>
+        </div>
+        <div>
+          <h3>Entrar</h3>
+          <div class="grid">
+            <input id="si-email" type="email" placeholder="Email"/>
+            <input id="si-password" type="password" placeholder="Senha"/>
+            <button id="btn-signin">Entrar</button>
+            <div id="si-msg" class="muted"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAINEL -->
+    <section id="panel" class="panel-card" style="display:none;">
+      <div class="topbar">
+        <div>
+          <h2>Painel do Funcionário</h2>
+          <div class="muted">Restaurante: <b id="p-restaurant"></b></div>
+        </div>
+        <div class="row">
+          <button id="btn-refresh" class="secondary">Recarregar</button>
+          <button id="btn-signout">Sair</button>
+        </div>
+      </div>
+
+      <!-- Header: cover/logo -->
+      <h3>Identidade do Restaurante</h3>
+      <div class="grid grid-2" style="align-items:center;margin-bottom:12px">
+        <div class="item-card">
+          <img id="img-cover" alt="Capa"/>
+          <div>
+            <div class="row">
+              <input id="file-cover" type="file" accept="image/*"/>
+              <button id="btn-cover">Enviar Capa</button>
+            </div>
+            <div class="muted">Arquivo alvo: <code>restaurants/&lt;slug&gt;/cover.jpg</code></div>
+            <div id="cover-msg" class="muted"></div>
+          </div>
+        </div>
+        <div class="item-card">
+          <img id="img-logo" alt="Logo"/>
+          <div>
+            <div class="row">
+              <input id="file-logo" type="file" accept="image/*"/>
+              <button id="btn-logo">Enviar Logo</button>
+            </div>
+            <div class="muted">Arquivo alvo: <code>restaurants/&lt;slug&gt;/logo.jpg</code></div>
+            <div id="logo-msg" class="muted"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lista de itens -->
+      <h3>Cardápio</h3>
+      <div id="items" class="grid"></div>
+      <div id="panel-msg" class="muted"></div>
+    </section>
+  </main>
+
+  <!-- Se você NÃO tiver ifood-clone-app.js, defina suas chaves aqui -->
+  <script src="js/script.js"></script>
+
+  <script type="module">
+    const $ = (s, c=document) => c.querySelector(s);
+    const $$ = (s, c=document) => Array.from(c.querySelectorAll(s));
+    const fmt = (n) => Number(n||0).toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
+
+    // ------- Supabase client
+    let supabase;
+    try {
+      const mod = await import("./js/ifood-clone-app.js"); // se existir
+      supabase = mod?.supabase;
+    } catch {}
+    if (!supabase) {
+      const { createClient } = await import("https://esm.sh/@supabase/supabase-js@2");
+      supabase = createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
+    }
+
+    // ------- Helpers Storage
+    function publicUrl(bucket, path){
+      return supabase.storage.from(bucket).getPublicUrl(path).data.publicUrl;
+    }
+    async function uploadImage(bucket, path, file){
+      const { error } = await supabase.storage.from(bucket).upload(path, file, { upsert: true, cacheControl: "3600" });
+      if (error) throw error;
+      return publicUrl(bucket, path);
+    }
+
+    // ------- Estado atual
+    let CURRENT_PROFILE = null; // { id, restaurant_slug }
+    let SLUG = null;
+
+    // ------- Auth UI
+    $("#btn-signup").addEventListener("click", async ()=>{
+      const email = $("#su-email").value.trim();
+      const password = $("#su-password").value;
+      const slug = $("#su-restaurant").value.trim() || "rest_bk";
+      $("#su-msg").textContent = "Criando conta...";
+      try {
+        const { data, error } = await supabase.auth.signUp({ email, password });
+        if (error) throw error;
+        const user = data.user;
+        if (!user) throw new Error("Usuário não retornado (verifique confirmação de email, se habilitada).");
+
+        // cria profile
+        const { error: perr } = await supabase.from("profiles")
+          .insert({ id: user.id, role: "employee", restaurant_slug: slug });
+        if (perr) throw perr;
+
+        $("#su-msg").innerHTML = "Conta criada! Faça login para continuar.";
+      } catch (e) {
+        $("#su-msg").innerHTML = `<span class="error">${e.message}</span>`;
+      }
+    });
+
+    $("#btn-signin").addEventListener("click", async ()=>{
+      const email = $("#si-email").value.trim();
+      const password = $("#si-password").value;
+      $("#si-msg").textContent = "Entrando...";
+      try {
+        const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+        if (error) throw error;
+        await afterLogin();
+      } catch (e) {
+        $("#si-msg").innerHTML = `<span class="error">${e.message}</span>`;
+      }
+    });
+
+    $("#btn-signout").addEventListener("click", async ()=>{
+      await supabase.auth.signOut();
+      $("#panel").style.display = "none";
+      $("#auth").style.display = "block";
+    });
+
+    async function afterLogin(){
+      const { data: sess } = await supabase.auth.getSession();
+      const userId = sess?.session?.user?.id;
+      if (!userId) return;
+
+      const { data: prof, error } = await supabase.from("profiles")
+        .select("*").eq("id", userId).single();
+      if (error) throw error;
+
+      CURRENT_PROFILE = prof;
+      SLUG = prof.restaurant_slug;
+      $("#p-restaurant").textContent = SLUG;
+      $("#auth").style.display = "none";
+      $("#panel").style.display = "block";
+      await loadHeaderImages();
+      await loadItems();
+    }
+
+    // ------- Header (cover/logo)
+    async function loadHeaderImages(){
+      try {
+        $("#img-cover").src = publicUrl("products", `restaurants/${SLUG}/cover.jpg`);
+        $("#img-logo").src  = publicUrl("products", `restaurants/${SLUG}/logo.jpg`);
+      } catch {}
+    }
+
+    $("#btn-cover").addEventListener("click", async ()=>{
+      const f = $("#file-cover").files[0];
+      if (!f) return $("#cover-msg").textContent = "Selecione um arquivo.";
+      $("#btn-cover").disabled = true; $("#cover-msg").textContent = "Enviando...";
+      try {
+        const url = await uploadImage("products", `restaurants/${SLUG}/cover.jpg`, f);
+        $("#img-cover").src = url;
+        $("#cover-msg").innerHTML = `<span class="success">Capa atualizada!</span>`;
+      } catch(e){ $("#cover-msg").innerHTML = `<span class="error">${e.message}</span>`; }
+      finally{ $("#btn-cover").disabled = false; }
+    });
+
+    $("#btn-logo").addEventListener("click", async ()=>{
+      const f = $("#file-logo").files[0];
+      if (!f) return $("#logo-msg").textContent = "Selecione um arquivo.";
+      $("#btn-logo").disabled = true; $("#logo-msg").textContent = "Enviando...";
+      try {
+        const url = await uploadImage("products", `restaurants/${SLUG}/logo.jpg`, f);
+        $("#img-logo").src = url;
+        $("#logo-msg").innerHTML = `<span class="success">Logo atualizada!</span>`;
+      } catch(e){ $("#logo-msg").innerHTML = `<span class="error">${e.message}</span>`; }
+      finally{ $("#btn-logo").disabled = false; }
+    });
+
+    // ------- Itens
+    const DEFAULT_ITEMS = [
+      { id:"1", name:"Whopper", price:19.90 },
+      { id:"2", name:"Cheeseburger", price:12.90 },
+      { id:"3", name:"Bacon King", price:24.90 },
+      { id:"4", name:"Combo Whopper", price:29.90 },
+      { id:"5", name:"Combo Duplo Cheese", price:22.90 },
+      { id:"6", name:"Refrigerante 500ml", price:8.90 },
+      { id:"7", name:"Suco Natural 300ml", price:7.50 },
+      { id:"8", name:"Água Mineral 500ml", price:4.50 },
+      { id:"9", name:"Sundae Chocolate", price:9.90 },
+      { id:"10", name:"Apple Pie", price:7.90 },
+      { id:"11", name:"Milkshake Chocolate", price:12.90 },
+    ];
+
+    async function loadItems(){
+      $("#items").innerHTML = "Carregando itens...";
+      const { data, error } = await supabase
+        .from("menu_items")
+        .select("*")
+        .eq("restaurant_slug", SLUG)
+        .order("id");
+      let items = [];
+      if (error) {
+        $("#panel-msg").innerHTML = `<span class="error">${error.message}</span>`;
+        items = DEFAULT_ITEMS;
+      } else {
+        items = (data?.length ? data : DEFAULT_ITEMS);
+      }
+      renderItems(items);
+    }
+
+    function renderItems(items){
+      const html = items.map(it => `
+        <div class="item-card" data-id="${it.id}">
+          <img src="${publicUrl('products', `products/${SLUG}/${it.id}.jpg`)}"
+               alt="${it.name}" onerror="this.src='images/agua.jpg'"/>
+          <div>
+            <div class="row">
+              <input type="text" class="i-name" value="${it.name}" placeholder="Nome do item"/>
+              <input type="number" step="0.01" class="i-price" value="${Number(it.price||0)}" placeholder="Preço"/>
+              <button class="btn-save">Salvar Nome/Preço</button>
+            </div>
+            <div class="row" style="margin-top:8px">
+              <input type="file" class="i-file" accept="image/*"/>
+              <button class="btn-upload secondary">Enviar Nova Foto</button>
+            </div>
+            <div class="muted">Arquivo alvo: <code>products/${SLUG}/${it.id}.jpg</code></div>
+            <div class="i-msg muted"></div>
+          </div>
+        </div>
+      `).join("");
+      $("#items").innerHTML = html;
+    }
+
+    // Save / Upload handlers delegados
+    $("#items").addEventListener("click", async (e)=>{
+      const card = e.target.closest(".item-card"); if(!card) return;
+      const id = card.dataset.id;
+      const msg = card.querySelector(".i-msg");
+
+      // Salvar nome/preço (upsert)
+      if (e.target.classList.contains("btn-save")){
+        const name = card.querySelector(".i-name").value.trim();
+        const price = Number(card.querySelector(".i-price").value || 0);
+        e.target.disabled = true; msg.textContent = "Salvando...";
+        try{
+          const { error } = await supabase.from("menu_items")
+            .upsert({ restaurant_slug: SLUG, id, name, price });
+          if (error) throw error;
+          msg.innerHTML = `<span class="success">Salvo!</span>`;
+        } catch(err){ msg.innerHTML = `<span class="error">${err.message}</span>`; }
+        finally{ e.target.disabled = false; }
+      }
+
+      // Enviar nova foto
+      if (e.target.classList.contains("btn-upload")){
+        const file = card.querySelector(".i-file").files[0];
+        if(!file){ msg.textContent = "Selecione um arquivo."; return; }
+        e.target.disabled = true; msg.textContent = "Enviando imagem...";
+        try{
+          const url = await uploadImage("products", `products/${SLUG}/${id}.jpg`, file);
+          card.querySelector("img").src = url + `?t=${Date.now()}`; // bust cache
+          msg.innerHTML = `<span class="success">Imagem atualizada!</span>`;
+        } catch(err){ msg.innerHTML = `<span class="error">${err.message}</span>`; }
+        finally{ e.target.disabled = false; }
+      }
+    });
+
+    $("#btn-refresh").addEventListener("click", loadItems);
+
+    // Auto-login se já houver sessão
+    (async ()=>{
+      const { data } = await supabase.auth.getSession();
+      if (data?.session) await afterLogin();
+    })();
+  </script>
+</body>
+</html>

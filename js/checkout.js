@@ -190,13 +190,18 @@ async function createOrderOnSupabase(cart, totals){
 
   const { data: sess } = await supabase.auth.getSession();
   const userId = sess?.session?.user?.id ?? null;
-  const restaurantId = cart[0]?.restaurant_id ?? null;
-
+  const restaurantSlug = cart[0]?.restaurant_id || window.RESTAURANT_SLUG;
   const { data: order, error } = await supabase
-    .from("orders")
-    .insert({ user_id: userId, restaurant_id: restaurantId, total: totals.total, status: "pendente" })
-    .select()
-    .single();
+    .from('orders')
+    .insert({
+      user_id: sess?.session?.user?.id,
+      restaurant_slug: restaurantSlug,
+      total: totals.total,
+      status: 'pendente'
+  })
+  .select()
+  .single();
+
 
   if (error) throw error;
 

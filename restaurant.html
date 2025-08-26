@@ -1,480 +1,832 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Burger King - iFood Clone</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Burger King - iFood Clone</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    /* Mini estilos do modo edição */
+    /* antes tinha display:none e depois display:flex no mesmo bloco */
+    .editbar{
+    display: none;                /* fica OCULTA por padrão */
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+    padding: 10px 16px;
+    justify-content: space-between;
+    align-items: center;
+    }
+    .edit-tag{display:inline-flex;align-items:center;gap:6px;background:#fff2f2;border:1px solid #ffcaca;color:#b00020;padding:4px 8px;border-radius:8px;font-size:12px}
+    .edit-actions{margin-top:8px;display:none;gap:8px;flex-wrap:wrap}
+    .edit-on .edit-actions{display:flex}
+    .edit-input{padding:8px 10px;border:1px solid #ddd;border-radius:8px}
+    .edit-btn{padding:8px 12px;border:0;border-radius:8px;background:#e21;color:#fff;cursor:pointer}
+    .edit-btn.secondary{background:#555}
+    .edit-btn.small{padding:6px 10px;font-size:12px}
+    .item-card-edit{border:1px dashed #f5a6a6;border-radius:12px;padding:8px;margin-top:8px;background:#fff9f9}
+    .hidden{display:none !important}
+    .muted{opacity:.8}
+  </style>
 </head>
 <body>
-    <!-- Barra de Navegação -->
-    <nav class="navbar">
-        <div class="navbar-container">
-            <div class="navbar-logo">
-                <a href="index.html">
-                    <span class="logo-text">iFood</span>
-                    <span class="logo-clone">Clone</span>
-                </a>
-            </div>
-            
-            <div class="navbar-search">
-                <input type="text" placeholder="Buscar restaurante ou comida...">
-                <button><i class="fas fa-search"></i></button>
-            </div>
-            
-            <div class="navbar-links">
-                <a href="login.html" class="nav-link"><i class="fas fa-user"></i> Entrar</a>
-                <a href="checkout.html" class="nav-link cart-link">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span class="cart-count">0</span>
-                </a>
-            </div>
-        </div>
-    </nav>
+  <!-- Barra de Navegação -->
+  <nav class="navbar">
+    <div class="navbar-container">
+      <div class="navbar-logo">
+        <a href="index.html">
+          <span class="logo-text">iFood</span>
+          <span class="logo-clone">Clone</span>
+        </a>
+      </div>
 
-    <!-- Cabeçalho do Restaurante -->
-    <header class="restaurant-header">
-        <div class="restaurant-cover" style="background-image: url('images/agua.jpg');"></div>
-        <div class="restaurant-info-container">
-        <div class="restaurant-info">
-            <div class="restaurant-logo" style="background-image: url('images/agua.jpg');"></div>
-            <div class="restaurant-details">
-            <h1>Burger King</h1>
-            <div class="restaurant-meta">
-                <span class="rating">4.8 <i class="fas fa-star"></i></span>
-                
-                <span class="category">Lanches • Americana</span>
-            </div>
-            <p class="address">Brasilia, Bsb</p>
-            </div>
-        </div>
-        <div class="restaurant-promo">
-            <div class="promo-banner">
-            <i class="fas fa-percentage"></i>
-            <span>10% OFF no pedido mínimo de R$ 30,00 com cupom BK10</span>
-            </div>
-        </div>
-        </div>
-    </header>
+      <div class="navbar-search">
+        <input type="text" placeholder="Buscar restaurante ou comida..." />
+        <button><i class="fas fa-search"></i></button>
+      </div>
 
-    <!-- Menu do Restaurante -->
-    <section class="restaurant-menu">
-        <div class="menu-container">
-            <div class="menu-sidebar">
-                <h3>Categorias</h3>
-                <ul class="menu-categories">
-                    <li class="active"><a href="#burgers">Burgers</a></li>
-                    <li><a href="#combos">Combos</a></li>
-                    <li><a href="#bebidas">Bebidas</a></li>
-                    <li><a href="#sobremesas">Sobremesas</a></li>
-                </ul>
-            </div>
-            
-            <div class="menu-items">
-                <div class="menu-section" id="burgers">
-                    <h2>Burgers</h2>
-                    
-                    <div class="menu-item">
-                        <div class="item-info">
-                            <h3>Whopper</h3>
-                            <p class="item-description">Pão com gergelim, hambúrguer de carne 100% bovina, queijo, alface, tomate, maionese, ketchup, picles e cebola.</p>
-                            <p class="item-price">R$ 19,90</p>
-                        </div>
-                        <div class="item-add">
-                            <img src="images/agua.jpg"alt="Whopper" class="item-image">
-                            <button class="add-to-cart" data-id="1" data-name="Whopper" data-price="19.90">Adicionar</button>
-                        </div>
-                    </div>
-                    
-                    <div class="menu-item">
-                        <div class="item-info">
-                            <h3>Cheeseburger</h3>
-                            <p class="item-description">Pão, hambúrguer de carne 100% bovina, queijo derretido, picles, ketchup e mostarda.</p>
-                            <p class="item-price">R$ 12,90</p>
-                        </div>
-                        <div class="item-add">
-                            <img src="images/agua.jpg" alt="Cheeseburger" class="item-image">
-                            <button class="add-to-cart" data-id="2" data-name="Cheeseburger" data-price="12.90">Adicionar</button>
-                        </div>
-                    </div>
-                    
-                    <div class="menu-item">
-                        <div class="item-info">
-                            <h3>Bacon King</h3>
-                            <p class="item-description">Dois hambúrgueres de carne 100% bovina, queijo, bacon crocante, ketchup e maionese no pão com gergelim.</p>
-                            <p class="item-price">R$ 24,90</p>
-                        </div>
-                        <div class="item-add">
-                            <img src="images/agua.jpg" alt="Bacon King" class="item-image">
-                            <button class="add-to-cart" data-id="3" data-name="Bacon King" data-price="24.90">Adicionar</button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="menu-section" id="combos">
-                    <h2>Combos</h2>
-                    
-                    <div class="menu-item">
-                        <div class="item-info">
-                            <h3>Combo Whopper</h3>
-                            <p class="item-description">Whopper + Batata Média + Refri 500ml</p>
-                            <p class="item-price">R$ 29,90</p>
-                            <p class="item-save">Economize R$ 5,00</p>
-                        </div>
-                        <div class="item-add">
-                            <img src="images/agua.jpg" alt="Combo Whopper" class="item-image">
-                            <button class="add-to-cart" data-id="4" data-name="Combo Whopper" data-price="29.90">Adicionar</button>
-                        </div>
-                    </div>
-                    
-                    <div class="menu-item">
-                        <div class="item-info">
-                            <h3>Combo Duplo Cheese</h3>
-                            <p class="item-description">2 Cheeseburgers + Batata Pequena + Refri 300ml</p>
-                            <p class="item-price">R$ 22,90</p>
-                            <p class="item-save">Economize R$ 3,00</p>
-                        </div>
-                        <div class="item-add">
-                            <img src="images/agua.jpg" alt="Combo Duplo Cheese" class="item-image">
-                            <button class="add-to-cart" data-id="5" data-name="Combo Duplo Cheese" data-price="22.90">Adicionar</button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="menu-section" id="bebidas">
-                    <h2>Bebidas</h2>
-                    
-                    <div class="menu-item">
-                        <div class="item-info">
-                            <h3>Refrigerante 500ml</h3>
-                            <p class="item-description">Coca-Cola, Guaraná, Fanta ou Sprite.</p>
-                            <p class="item-price">R$ 8,90</p>
-                        </div>
-                        <div class="item-add">
-                            <img src="images/agua.jpg" alt="Refrigerante" class="item-image">
-                            <button class="add-to-cart" data-id="6" data-name="Refrigerante 500ml" data-price="8.90">Adicionar</button>
-                        </div>
-                    </div>
-                    
-                    <div class="menu-item">
-                        <div class="item-info">
-                            <h3>Suco Natural 300ml</h3>
-                            <p class="item-description">Laranja, Limão ou Uva.</p>
-                            <p class="item-price">R$ 7,50</p>
-                        </div>
-                        <div class="item-add">
-                            <img src="images/agua.jpg"alt="suco Natural" class="item-image">
-                            <button class="add-to-cart" data-id="7" data-name="Suco Natural 300ml" data-price="7.50">Adicionar</button>
-                        </div>
-                    </div>
-                    
-                    <div class="menu-item">
-                        <div class="item-info">
-                            <h3>Água Mineral 500ml</h3>
-                            <p class="item-description">Água mineral sem gás.</p>
-                            <p class="item-price">R$ 4,50</p>
-                        </div>
-                        <div class="item-add">
-                            <img src="images/agua.jpg"alt="agua Mineral" class="item-image">
-                            <button class="add-to-cart" data-id="8" data-name="Água Mineral 500ml" data-price="4.50">Adicionar</button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="menu-section" id="sobremesas">
-                    <h2>Sobremesas</h2>
-                    
-                    <div class="menu-item">
-                        <div class="item-info">
-                            <h3>Sundae Chocolate</h3>
-                            <p class="item-description">Sorvete de baunilha com cobertura de chocolate.</p>
-                            <p class="item-price">R$ 9,90</p>
-                        </div>
-                        <div class="item-add">
-                            <img src="images/agua.jpg"alt="agua Mineral" class="item-image">
-                            <button class="add-to-cart" data-id="9" data-name="Sundae Chocolate" data-price="9.90">Adicionar</button>
-                        </div>
-                    </div>
-                    
-                    <div class="menu-item">
-                        <div class="item-info">
-                            <h3>Apple Pie</h3>
-                            <p class="item-description">Torta de maçã crocante.</p>
-                            <p class="item-price">R$ 7,90</p>
-                        </div>
-                        <div class="item-add">
-                            <img src="images/agua.jpg"alt="Apple Pie" class="item-image">
-                            <button class="add-to-cart" data-id="10" data-name="Apple Pie" data-price="7.90">Adicionar</button>
-                        </div>
-                    </div>
-                    
-                    <div class="menu-item">
-                        <div class="item-info">
-                            <h3>Milkshake Chocolate</h3>
-                            <p class="item-description">Milkshake cremoso de chocolate com chantilly.</p>
-                            <p class="item-price">R$ 12,90</p>
-                        </div>
-                        <div class="item-add">
-                            <img src="images/agua.jpg"alt="Milkshake Chocolate" class="item-image">
-                            <button class="add-to-cart" data-id="11" data-name="Milkshake Chocolate" data-price="12.90">Adicionar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Avaliações -->
-    <section class="reviews">
-        <h2>Avaliações</h2>
-        <div class="review-container">
-            <div class="review-card">
-                <div class="review-header">
-                    <div class="reviewer">
-                        <div class="reviewer-avatar">J</div>
-                        <div class="reviewer-info">
-                            <h4>João Silva</h4>
-                            <span class="review-date">12/05/2023</span>
-                        </div>
-                    </div>
-                    <div class="review-rating">
-                        <span>4.5</span>
-                        <i class="fas fa-star"></i>
-                    </div>
-                </div>
-                <div class="review-content">
-                    <p>O Whopper é incrível! Sempre peço quando estou com fome. A entrega foi rápida e o lanche veio quentinho.</p>
-                </div>
-            </div>
-            
-            <div class="review-card">
-                <div class="review-header">
-                    <div class="reviewer">
-                        <div class="reviewer-avatar">M</div>
-                        <div class="reviewer-info">
-                            <h4>Maria Souza</h4>
-                            <span class="review-date">28/04/2023</span>
-                        </div>
-                    </div>
-                    <div class="review-rating">
-                        <span>5.0</span>
-                        <i class="fas fa-star"></i>
-                    </div>
-                </div>
-                <div class="review-content">
-                    <p>Melhor hambúrguer da região! O Bacon King é perfeito, com muito bacon crocante. Recomendo demais!</p>
-                </div>
-            </div>
-            
-            <div class="review-card">
-                <div class="review-header">
-                    <div class="reviewer">
-                        <div class="reviewer-avatar">C</div>
-                        <div class="reviewer-info">
-                            <h4>Carlos Oliveira</h4>
-                            <span class="review-date">15/05/2023</span>
-                        </div>
-                    </div>
-                    <div class="review-rating">
-                        <span>4.0</span>
-                        <i class="fas fa-star"></i>
-                    </div>
-                </div>
-                <div class="review-content">
-                    <p>O lanche veio bem quente e rápido. Só achei que poderia ter mais molho.</p>
-                </div>
-            </div>
-            
-            <div class="review-card">
-                <div class="review-header">
-                    <div class="reviewer">
-                        <div class="reviewer-avatar">A</div>
-                        <div class="reviewer-info">
-                            <h4>Ana Beatriz</h4>
-                            <span class="review-date">02/05/2023</span>
-                        </div>
-                    </div>
-                    <div class="review-rating">
-                        <span>5.0</span>
-                        <i class="fas fa-star"></i>
-                    </div>
-                </div>
-                <div class="review-content">
-                    <p>Adoro o Whopper! Sempre peço quando estou com muita fome. Entrega sempre dentro do prazo.</p>
-                </div>
-            </div>
-        </div>
-        <button class="see-all-reviews">Ver todas as avaliações</button>
-    </section>
-
-    <!-- Rodapé -->
-    <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-section">
-                <h3>Sobre Nós</h3>
-                <ul>
-                    <li><a href="#">Quem somos</a></li>
-                    <li><a href="#">Trabalhe conosco</a></li>
-                    <li><a href="#">Sustentabilidade</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Para Restaurantes</h3>
-                <ul>
-                    <li><a href="#">Cadastre seu restaurante</a></li>
-                    <li><a href="#">iFood Partner</a></li>
-                    <li><a href="#">Soluções para entregadores</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Social</h3>
-                <div class="social-icons">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                </div>
-            </div>
-            <div class="footer-section">
-                <h3>Baixe nosso app</h3>
-                <div class="app-download">
-                    <a href="#"><img src="images/agua.jpg" alt="Google Play"></a>
-                    <a href="#"><img src="images/agua.jpg"alt="App Store"></a>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 iFood Clone. Todos os direitos reservados.</p>
-        </div>
-    </footer>
-
-    <!-- Carrinho de Compras Modal -->
-    <div class="cart-modal">
-        <div class="cart-content">
-            <div class="cart-header">
-                <h3>Seu Carrinho</h3>
-                <button class="close-cart">&times;</button>
-            </div>
-            <div class="cart-items">
-                <!-- Itens serão adicionados dinamicamente aqui -->
-            </div>
-            <div class="cart-summary">
-                <div class="cart-totals">
-                    <div class="subtotal">
-                        <span>Subtotal</span>
-                        <span class="subtotal-amount">R$ 0,00</span>
-                    </div>
-                    
-                    </div>
-                    <div class="total">
-                        <span>Total</span>
-                        <span class="total-amount">R$ 0,00</span>
-                    </div>
-                </div>
-                <button class="checkout-button">Finalizar Pedido</button>
-            </div>
-        </div>
+      <div class="navbar-links">
+        <!-- na navbar, junto com outros links -->
+        <a
+        href="#" class="nav-link" id="btn-employee-login">Sou funcionário</a>
+        <a href="login.html" class="nav-link"><i class="fas fa-user"></i> Entrar</a>
+        <a href="checkout.html" class="nav-link cart-link">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="cart-count">0</span>
+        </a>
+      </div>
     </div>
+  </nav>
 
-    <!-- Carrinho Flutuante -->
-    <div class="floating-cart">
-        <div class="cart-icon">
-            <i class="fas fa-shopping-cart"></i>
-            <span class="cart-badge">0</span>
-        </div>
-        <div class="cart-total">R$ 0,00</div>
+  <!-- Barra de edição (só aparece se o usuário pode editar) -->
+  <div id="editbar" class="editbar">
+    <div class="row">
+      <span class="edit-tag"><i class="fas fa-user-shield"></i> Área do Funcionário</span>
+      <span class="muted">Restaurante: <b id="eb-slug"></b></span>
     </div>
+    <div class="row">
+      <button id="btn-toggle-edit" class="edit-btn secondary">Ativar modo edição</button>
+      <a href="areaFuncionario.html" class="edit-btn small" style="text-decoration:none;background:#0a7b34">Painel</a>
+      <button id="btn-signout" class="edit-btn small">Sair</button>
+    </div>
+  </div>
 
-
-    <script type="module">
-        const $ = (s, c=document) => c.querySelector(s);
-        const $$ = (s, c=document) => Array.from(c.querySelectorAll(s));
-        const fmt = (n) => Number(n||0).toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
-        const KEY = "shoppingCart", DELIVERY = 0.00;
-
-        const load = () => { try { return JSON.parse(localStorage.getItem(KEY)||"[]"); } catch { return []; } };
-        const save = (c) => localStorage.setItem(KEY, JSON.stringify(c));
-        const count = (c) => c.reduce((a,i)=>a+(i.quantity||0),0);
-        const subtotal = (c) => c.reduce((a,i)=>a+(+i.price||0)*(+i.quantity||0),0);
-
-        function refreshBadges(){
-            const cart = load();
-            $$(".cart-count,.cart-badge").forEach(b=> b.textContent = String(count(cart)));
-            const st = subtotal(cart);
-            $(".cart-total") && ($(".cart-total").textContent = fmt(st + DELIVERY));
-        }
-
-        function renderModal(){
-            const cart = load();
-            const box = $(".cart-items");
-            if(!box) return;
-            box.innerHTML = cart.length ? cart.map(it=>`
-            <div class="cart-item">
-                <div class="item-details"><h4>${it.name}</h4><p>${fmt(it.price)}</p></div>
-                <div class="item-price">${fmt(it.price*it.quantity)}</div>
-                <div class="item-quantity">
-                <button class="quantity-btn minus" data-id="${it.id}">-</button>
-                <span class="quantity-value">${it.quantity}</span>
-                <button class="quantity-btn plus" data-id="${it.id}">+</button>
-                </div>
-                <div class="remove-item" data-id="${it.id}"><i class="fas fa-trash"></i></div>
+  <!-- Cabeçalho do Restaurante -->
+  <header class="restaurant-header">
+    <div class="restaurant-cover" style="background-image: url('images/agua.jpg');"></div>
+    <div class="restaurant-info-container">
+      <div class="restaurant-info">
+        <div class="restaurant-logo" style="background-image: url('images/agua.jpg');"></div>
+        <div class="restaurant-details">
+          <h1 id="rest-name">Burger King</h1>
+          <div class="restaurant-meta">
+            <span class="rating">4.8 <i class="fas fa-star"></i></span>
+            <span class="category">Lanches • Americana</span>
+          </div>
+          <p class="address">Av. Paulista, 1000 - São Paulo, SP</p>
+          <!-- Controles para capa/logo no modo edição -->
+          <div class="edit-actions" id="header-edit">
+            <div class="item-card-edit">
+              <div class="row">
+                <label class="muted">Capa:</label>
+                <input id="file-cover" type="file" accept="image/*" class="edit-input"/>
+                <button id="btn-cover" class="edit-btn small">Enviar Capa</button>
+              </div>
+              <div class="row" style="margin-top:6px">
+                <label class="muted">Logo:</label>
+                <input id="file-logo" type="file" accept="image/*" class="edit-input"/>
+                <button id="btn-logo" class="edit-btn small">Enviar Logo</button>
+              </div>
+              <div id="header-msg" class="muted" style="margin-top:6px"></div>
+              <div class="muted" style="margin-top:4px">Destino: <code>restaurants/&lt;slug&gt;/{cover.jpg,logo.jpg}</code></div>
             </div>
-            `).join("") : `<p class="empty-cart">Seu carrinho está vazio</p>`;
+          </div>
+        </div>
+      </div>
+      <div class="restaurant-promo">
+        <div class="promo-banner">
+          <i class="fas fa-percentage"></i>
+          <span>10% OFF no pedido mínimo de R$ 30,00 com cupom BK10</span>
+        </div>
+      </div>
+    </div>
+  </header>
 
-            const st = subtotal(cart);
-            $(".subtotal-amount").textContent = fmt(st);
-            $(".delivery-amount").textContent = fmt(DELIVERY);
-            $(".total-amount").textContent = fmt(st + DELIVERY);
-        }
+  <!-- Menu do Restaurante -->
+  <section class="restaurant-menu">
+    <div class="menu-container">
+      <div class="menu-sidebar">
+        <h3>Categorias</h3>
+        <ul class="menu-categories">
+          <li class="active"><a href="#burgers">Burgers</a></li>
+          <li><a href="#combos">Combos</a></li>
+          <li><a href="#bebidas">Bebidas</a></li>
+          <li><a href="#sobremesas">Sobremesas</a></li>
+        </ul>
+      </div>
 
-        function addToCart({id,name,price,restaurant_id}){
-            const cart = load();
-            const found = cart.find(i=>i.id===id);
-            if(found) found.quantity += 1;
-            else cart.push({ id, name, price:+price, quantity:1, restaurant_id: restaurant_id||"rest_bk" });
-            save(cart); refreshBadges(); renderModal();
-        }
+      <div class="menu-items">
+        <!-- Burgers -->
+        <div class="menu-section" id="burgers">
+          <h2>Burgers</h2>
 
-        function changeQty(id,delta){
-            const cart = load();
-            const it = cart.find(i=>i.id===id);
-            if(!it) return;
-            it.quantity += delta;
-            if(it.quantity<=0) cart.splice(cart.findIndex(i=>i.id===id),1);
-            save(cart); refreshBadges(); renderModal();
-        }
+          <div class="menu-item" data-item="1">
+            <div class="item-info">
+              <h3 class="i-name">Whopper</h3>
+              <p class="item-description">Pão com gergelim, hambúrguer de carne 100% bovina, queijo, alface, tomate, maionese, ketchup, picles e cebola.</p>
+              <p class="item-price i-price-text">R$ 19,90</p>
+            </div>
+            <div class="item-add">
+              <img src="images/agua.jpg" alt="Whopper" class="item-image"/>
+              <button class="add-to-cart" data-id="1" data-name="Whopper" data-price="19.90" data-restaurant="rest_bk">Adicionar</button>
+            </div>
+            <!-- Editor inline (nome, preço, imagem) -->
+            <div class="edit-actions">
+              <div class="item-card-edit">
+                <div class="row">
+                  <input type="text" class="edit-input ei-name" placeholder="Nome do item" value="Whopper"/>
+                  <input type="number" step="0.01" class="edit-input ei-price" placeholder="Preço" value="19.90"/>
+                  <button class="edit-btn small btn-save">Salvar</button>
+                </div>
+                <div class="row" style="margin-top:6px">
+                  <input type="file" class="edit-input ei-file" accept="image/*"/>
+                  <button class="edit-btn small secondary btn-upload">Enviar foto</button>
+                </div>
+                <div class="muted">Destino: <code>products/rest_bk/1.jpg</code></div>
+                <div class="i-msg muted"></div>
+              </div>
+            </div>
+          </div>
 
-        document.addEventListener("click",(e)=>{
-            const btn = e.target.closest(".add-to-cart");
-            if(btn){
-            addToCart({
-                id: btn.dataset.id,
-                name: btn.dataset.name,
-                price: btn.dataset.price,
-                restaurant_id: btn.dataset.restaurant
-            });
-            }
-            if(e.target.closest(".floating-cart")){
-            $(".cart-modal").style.display = "flex"; renderModal();
-            }
-            if(e.target.classList.contains("close-cart") || e.target.classList.contains("cart-modal")){
-            $(".cart-modal").style.display = "none";
-            }
-            if(e.target.closest(".plus"))  changeQty(e.target.closest(".plus").dataset.id, +1);
-            if(e.target.closest(".minus")) changeQty(e.target.closest(".minus").dataset.id, -1);
-            if(e.target.closest(".remove-item")){
-            const id = e.target.closest(".remove-item").dataset.id;
-            save(load().filter(i=>i.id!==id)); refreshBadges(); renderModal();
-            }
-            if(e.target.classList.contains("checkout-button")){
-            if(load().length===0){ alert("Seu carrinho está vazio."); return; }
-            location.href = "checkout.html";
-            }
-        });
+          <div class="menu-item" data-item="2">
+            <div class="item-info">
+              <h3 class="i-name">Cheeseburger</h3>
+              <p class="item-description">Pão, hambúrguer de carne 100% bovina, queijo derretido, picles, ketchup e mostarda.</p>
+              <p class="item-price i-price-text">R$ 12,90</p>
+            </div>
+            <div class="item-add">
+              <img src="images/agua.jpg" alt="Cheeseburger" class="item-image"/>
+              <button class="add-to-cart" data-id="2" data-name="Cheeseburger" data-price="12.90" data-restaurant="rest_bk">Adicionar</button>
+            </div>
+            <div class="edit-actions">
+              <div class="item-card-edit">
+                <div class="row">
+                  <input type="text" class="edit-input ei-name" value="Cheeseburger"/>
+                  <input type="number" step="0.01" class="edit-input ei-price" value="12.90"/>
+                  <button class="edit-btn small btn-save">Salvar</button>
+                </div>
+                <div class="row" style="margin-top:6px">
+                  <input type="file" class="edit-input ei-file" accept="image/*"/>
+                  <button class="edit-btn small secondary btn-upload">Enviar foto</button>
+                </div>
+                <div class="muted">Destino: <code>products/rest_bk/2.jpg</code></div>
+                <div class="i-msg muted"></div>
+              </div>
+            </div>
+          </div>
 
-        document.addEventListener("DOMContentLoaded", refreshBadges);
+          <div class="menu-item" data-item="3">
+            <div class="item-info">
+              <h3 class="i-name">Bacon King</h3>
+              <p class="item-description">Dois hambúrgueres de carne 100% bovina, queijo, bacon crocante, ketchup e maionese no pão com gergelim.</p>
+              <p class="item-price i-price-text">R$ 24,90</p>
+            </div>
+            <div class="item-add">
+              <img src="images/agua.jpg" alt="Bacon King" class="item-image"/>
+              <button class="add-to-cart" data-id="3" data-name="Bacon King" data-price="24.90" data-restaurant="rest_bk">Adicionar</button>
+            </div>
+            <div class="edit-actions">
+              <div class="item-card-edit">
+                <div class="row">
+                  <input type="text" class="edit-input ei-name" value="Bacon King"/>
+                  <input type="number" step="0.01" class="edit-input ei-price" value="24.90"/>
+                  <button class="edit-btn small btn-save">Salvar</button>
+                </div>
+                <div class="row" style="margin-top:6px">
+                  <input type="file" class="edit-input ei-file" accept="image/*"/>
+                  <button class="edit-btn small secondary btn-upload">Enviar foto</button>
+                </div>
+                <div class="muted">Destino: <code>products/rest_bk/3.jpg</code></div>
+                <div class="i-msg muted"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Combos -->
+        <div class="menu-section" id="combos">
+          <h2>Combos</h2>
+
+          <div class="menu-item" data-item="4">
+            <div class="item-info">
+              <h3 class="i-name">Combo Whopper</h3>
+              <p class="item-description">Whopper + Batata Média + Refri 500ml</p>
+              <p class="item-price i-price-text">R$ 29,90</p>
+            </div>
+            <div class="item-add">
+              <img src="images/agua.jpg" alt="Combo Whopper" class="item-image"/>
+              <button class="add-to-cart" data-id="4" data-name="Combo Whopper" data-price="29.90" data-restaurant="rest_bk">Adicionar</button>
+            </div>
+            <div class="edit-actions">
+              <div class="item-card-edit">
+                <div class="row">
+                  <input type="text" class="edit-input ei-name" value="Combo Whopper"/>
+                  <input type="number" step="0.01" class="edit-input ei-price" value="29.90"/>
+                  <button class="edit-btn small btn-save">Salvar</button>
+                </div>
+                <div class="row" style="margin-top:6px">
+                  <input type="file" class="edit-input ei-file" accept="image/*"/>
+                  <button class="edit-btn small secondary btn-upload">Enviar foto</button>
+                </div>
+                <div class="muted">Destino: <code>products/rest_bk/4.jpg</code></div>
+                <div class="i-msg muted"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="menu-item" data-item="5">
+            <div class="item-info">
+              <h3 class="i-name">Combo Duplo Cheese</h3>
+              <p class="item-description">2 Cheeseburgers + Batata Pequena + Refri 300ml</p>
+              <p class="item-price i-price-text">R$ 22,90</p>
+            </div>
+            <div class="item-add">
+              <img src="images/agua.jpg" alt="Combo Duplo Cheese" class="item-image"/>
+              <button class="add-to-cart" data-id="5" data-name="Combo Duplo Cheese" data-price="22.90" data-restaurant="rest_bk">Adicionar</button>
+            </div>
+            <div class="edit-actions">
+              <div class="item-card-edit">
+                <div class="row">
+                  <input type="text" class="edit-input ei-name" value="Combo Duplo Cheese"/>
+                  <input type="number" step="0.01" class="edit-input ei-price" value="22.90"/>
+                  <button class="edit-btn small btn-save">Salvar</button>
+                </div>
+                <div class="row" style="margin-top:6px">
+                  <input type="file" class="edit-input ei-file" accept="image/*"/>
+                  <button class="edit-btn small secondary btn-upload">Enviar foto</button>
+                </div>
+                <div class="muted">Destino: <code>products/rest_bk/5.jpg</code></div>
+                <div class="i-msg muted"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bebidas -->
+        <div class="menu-section" id="bebidas">
+          <h2>Bebidas</h2>
+
+          <div class="menu-item" data-item="6">
+            <div class="item-info">
+              <h3 class="i-name">Refrigerante 500ml</h3>
+              <p class="item-description">Coca-Cola, Guaraná, Fanta ou Sprite.</p>
+              <p class="item-price i-price-text">R$ 8,90</p>
+            </div>
+            <div class="item-add">
+              <img src="images/agua.jpg" alt="Refrigerante" class="item-image"/>
+              <button class="add-to-cart" data-id="6" data-name="Refrigerante 500ml" data-price="8.90" data-restaurant="rest_bk">Adicionar</button>
+            </div>
+            <div class="edit-actions">
+              <div class="item-card-edit">
+                <div class="row">
+                  <input type="text" class="edit-input ei-name" value="Refrigerante 500ml"/>
+                  <input type="number" step="0.01" class="edit-input ei-price" value="8.90"/>
+                  <button class="edit-btn small btn-save">Salvar</button>
+                </div>
+                <div class="row" style="margin-top:6px">
+                  <input type="file" class="edit-input ei-file" accept="image/*"/>
+                  <button class="edit-btn small secondary btn-upload">Enviar foto</button>
+                </div>
+                <div class="muted">Destino: <code>products/rest_bk/6.jpg</code></div>
+                <div class="i-msg muted"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="menu-item" data-item="7">
+            <div class="item-info">
+              <h3 class="i-name">Suco Natural 300ml</h3>
+              <p class="item-description">Laranja, Limão ou Uva.</p>
+              <p class="item-price i-price-text">R$ 7,50</p>
+            </div>
+            <div class="item-add">
+              <img src="images/agua.jpg" alt="Suco Natural" class="item-image"/>
+              <button class="add-to-cart" data-id="7" data-name="Suco Natural 300ml" data-price="7.50" data-restaurant="rest_bk">Adicionar</button>
+            </div>
+            <div class="edit-actions">
+              <div class="item-card-edit">
+                <div class="row">
+                  <input type="text" class="edit-input ei-name" value="Suco Natural 300ml"/>
+                  <input type="number" step="0.01" class="edit-input ei-price" value="7.50"/>
+                  <button class="edit-btn small btn-save">Salvar</button>
+                </div>
+                <div class="row" style="margin-top:6px">
+                  <input type="file" class="edit-input ei-file" accept="image/*"/>
+                  <button class="edit-btn small secondary btn-upload">Enviar foto</button>
+                </div>
+                <div class="muted">Destino: <code>products/rest_bk/7.jpg</code></div>
+                <div class="i-msg muted"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="menu-item" data-item="8">
+            <div class="item-info">
+              <h3 class="i-name">Água Mineral 500ml</h3>
+              <p class="item-description">Água mineral sem gás.</p>
+              <p class="item-price i-price-text">R$ 4,50</p>
+            </div>
+            <div class="item-add">
+              <img src="images/agua.jpg" alt="Água Mineral" class="item-image"/>
+              <button class="add-to-cart" data-id="8" data-name="Água Mineral 500ml" data-price="4.50" data-restaurant="rest_bk">Adicionar</button>
+            </div>
+            <div class="edit-actions">
+              <div class="item-card-edit">
+                <div class="row">
+                  <input type="text" class="edit-input ei-name" value="Água Mineral 500ml"/>
+                  <input type="number" step="0.01" class="edit-input ei-price" value="4.50"/>
+                  <button class="edit-btn small btn-save">Salvar</button>
+                </div>
+                <div class="row" style="margin-top:6px">
+                  <input type="file" class="edit-input ei-file" accept="image/*"/>
+                  <button class="edit-btn small secondary btn-upload">Enviar foto</button>
+                </div>
+                <div class="muted">Destino: <code>products/rest_bk/8.jpg</code></div>
+                <div class="i-msg muted"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sobremesas -->
+        <div class="menu-section" id="sobremesas">
+          <h2>Sobremesas</h2>
+
+          <div class="menu-item" data-item="9">
+            <div class="item-info">
+              <h3 class="i-name">Sundae Chocolate</h3>
+              <p class="item-description">Sorvete de baunilha com cobertura de chocolate.</p>
+              <p class="item-price i-price-text">R$ 9,90</p>
+            </div>
+            <div class="item-add">
+              <img src="images/agua.jpg" alt="Sundae Chocolate" class="item-image"/>
+              <button class="add-to-cart" data-id="9" data-name="Sundae Chocolate" data-price="9.90" data-restaurant="rest_bk">Adicionar</button>
+            </div>
+            <div class="edit-actions">
+              <div class="item-card-edit">
+                <div class="row">
+                  <input type="text" class="edit-input ei-name" value="Sundae Chocolate"/>
+                  <input type="number" step="0.01" class="edit-input ei-price" value="9.90"/>
+                  <button class="edit-btn small btn-save">Salvar</button>
+                </div>
+                <div class="row" style="margin-top:6px">
+                  <input type="file" class="edit-input ei-file" accept="image/*"/>
+                  <button class="edit-btn small secondary btn-upload">Enviar foto</button>
+                </div>
+                <div class="muted">Destino: <code>products/rest_bk/9.jpg</code></div>
+                <div class="i-msg muted"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="menu-item" data-item="10">
+            <div class="item-info">
+              <h3 class="i-name">Apple Pie</h3>
+              <p class="item-description">Torta de maçã crocante.</p>
+              <p class="item-price i-price-text">R$ 7,90</p>
+            </div>
+            <div class="item-add">
+              <img src="images/agua.jpg" alt="Apple Pie" class="item-image"/>
+              <button class="add-to-cart" data-id="10" data-name="Apple Pie" data-price="7.90" data-restaurant="rest_bk">Adicionar</button>
+            </div>
+            <div class="edit-actions">
+              <div class="item-card-edit">
+                <div class="row">
+                  <input type="text" class="edit-input ei-name" value="Apple Pie"/>
+                  <input type="number" step="0.01" class="edit-input ei-price" value="7.90"/>
+                  <button class="edit-btn small btn-save">Salvar</button>
+                </div>
+                <div class="row" style="margin-top:6px">
+                  <input type="file" class="edit-input ei-file" accept="image/*"/>
+                  <button class="edit-btn small secondary btn-upload">Enviar foto</button>
+                </div>
+                <div class="muted">Destino: <code>products/rest_bk/10.jpg</code></div>
+                <div class="i-msg muted"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="menu-item" data-item="11">
+            <div class="item-info">
+              <h3 class="i-name">Milkshake Chocolate</h3>
+              <p class="item-description">Milkshake cremoso de chocolate com chantilly.</p>
+              <p class="item-price i-price-text">R$ 12,90</p>
+            </div>
+            <div class="item-add">
+              <img src="images/agua.jpg" alt="Milkshake Chocolate" class="item-image"/>
+              <button class="add-to-cart" data-id="11" data-name="Milkshake Chocolate" data-price="12.90" data-restaurant="rest_bk">Adicionar</button>
+            </div>
+            <div class="edit-actions">
+              <div class="item-card-edit">
+                <div class="row">
+                  <input type="text" class="edit-input ei-name" value="Milkshake Chocolate"/>
+                  <input type="number" step="0.01" class="edit-input ei-price" value="12.90"/>
+                  <button class="edit-btn small btn-save">Salvar</button>
+                </div>
+                <div class="row" style="margin-top:6px">
+                  <input type="file" class="edit-input ei-file" accept="image/*"/>
+                  <button class="edit-btn small secondary btn-upload">Enviar foto</button>
+                </div>
+                <div class="muted">Destino: <code>products/rest_bk/11.jpg</code></div>
+                <div class="i-msg muted"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><!-- .menu-items -->
+    </div><!-- .menu-container -->
+  </section>
+
+  <!-- Avaliações (mantido) -->
+  <section class="reviews">
+    <h2>Avaliações</h2>
+    <div class="review-container">
+      <!-- ... (mesmo conteúdo que você já tinha) ... -->
+      <div class="review-card">
+        <div class="review-header">
+          <div class="reviewer">
+            <div class="reviewer-avatar">J</div>
+            <div class="reviewer-info">
+              <h4>João Silva</h4>
+              <span class="review-date">12/05/2023</span>
+            </div>
+          </div>
+          <div class="review-rating"><span>4.5</span><i class="fas fa-star"></i></div>
+        </div>
+        <div class="review-content">
+          <p>O Whopper é incrível! Sempre peço quando estou com fome. A entrega foi rápida e o lanche veio quentinho.</p>
+        </div>
+      </div>
+      <!-- ...demais cards... -->
+    </div>
+    <button class="see-all-reviews">Ver todas as avaliações</button>
+  </section>
+
+  <!-- Rodapé (mantido) -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3>Sobre Nós</h3>
+        <ul>
+          <li><a href="#">Quem somos</a></li>
+          <li><a href="#">Trabalhe conosco</a></li>
+          <li><a href="#">Sustentabilidade</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Para Restaurantes</h3>
+        <ul>
+          <li><a href="#">Cadastre seu restaurante</a></li>
+          <li><a href="#">iFood Partner</a></li>
+          <li><a href="#">Soluções para entregadores</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Social</h3>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h3>Baixe nosso app</h3>
+        <div class="app-download">
+          <a href="#"><img src="images/google-play.png" alt="Google Play" onerror="this.src='images/agua.jpg'"/></a>
+          <a href="#"><img src="images/app-store.png" alt="App Store" onerror="this.src='images/agua.jpg'"/></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2023 iFood Clone. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Carrinho Modal + Flutuante (mantido) -->
+  <div class="cart-modal" style="display:none;">
+    <div class="cart-content">
+      <div class="cart-header">
+        <h3>Seu Carrinho</h3>
+        <button class="close-cart" aria-label="Fechar">&times;</button>
+      </div>
+      <div class="cart-items"></div>
+      <div class="cart-summary">
+        <div class="cart-totals">
+          <div class="subtotal"><span>Subtotal</span><span class="subtotal-amount">R$ 0,00</span></div>
+          <div class="delivery-fee"><span>Taxa de entrega</span><span class="delivery-amount">R$ 5,90</span></div>
+          <div class="total"><span>Total</span><span class="total-amount">R$ 5,90</span></div>
+        </div>
+        <button class="checkout-button">Finalizar Pedido</button>
+      </div>
+    </div>
+  </div>
+  <div class="floating-cart">
+    <div class="cart-icon">
+      <i class="fas fa-shopping-cart"></i>
+      <span class="cart-badge">0</span>
+    </div>
+    <div class="cart-total">R$ 0,00</div>
+  </div>
+
+  <!-- Config rápida (se não tiver ifood-clone-app.js) -->
+    <script>
+        // Config rápida
+        window.SUPABASE_URL = window.SUPABASE_URL || "https://epzgwoujykafwgrvhtbf.supabase.co"; /* troque */
+        window.SUPABASE_ANON_KEY = window.SUPABASE_ANON_KEY || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"; /* troque */
+        window.RESTAURANT_SLUG = window.RESTAURANT_SLUG || "rest_bk"; /* troque se quiser */
+
+        // Monte o link "Sou funcionário" com redirect e slug – tudo LOCAL aqui
+        (function () {
+            const slug = window.RESTAURANT_SLUG || "rest_bk";   // <- variável local
+            const empLink = document.getElementById("btn-employee-login");
+            if (empLink) {
+            const redirect = encodeURIComponent(location.pathname + location.search);
+            empLink.href = `areaFuncionario.html?redirect=${redirect}&slug=${slug}`;
+            }
+        })();
     </script>
-    <script src="js/script.js"></script>
-    <script src="js/restaurant.js"></script>
+
+
+  <!-- ÚNICO script desta página -->
+  <script type="module">
+    const $ = (s, c=document) => c.querySelector(s);
+    const $$ = (s, c=document) => Array.from(c.querySelectorAll(s));
+    const fmt = (n) => Number(n||0).toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
+    const KEY="shoppingCart", DELIVERY=5.90, SLUG = window.RESTAURANT_SLUG || "rest_bk";
+
+    // ============ Supabase ============
+    let supabase;
+    try {
+      const mod = await import("./js/ifood-clone-app.js"); // usa se existir
+      supabase = mod?.supabase;
+    } catch {}
+    if (!supabase) {
+      const { createClient } = await import("https://esm.sh/@supabase/supabase-js@2");
+      supabase = createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
+    }
+
+    const pub = (bucket, path) => supabase.storage.from(bucket).getPublicUrl(path).data.publicUrl;
+
+    // ============ Carregar imagens do Storage ============
+    function loadHeaderImages(){
+      try{
+        const coverUrl = pub("products", `restaurants/${SLUG}/cover.jpg`);
+        const logoUrl  = pub("products", `restaurants/${SLUG}/logo.jpg`);
+        const cover = $(".restaurant-cover"); const logo = $(".restaurant-logo");
+        if (cover) cover.style.backgroundImage = `url('${coverUrl}')`;
+        if (logo)  logo.style.backgroundImage  = `url('${logoUrl}')`;
+      }catch(e){ console.warn("[header img]", e.message); }
+    }
+    function loadItemImages(){
+      $$(".menu-item").forEach(mi=>{
+        const id = mi.dataset.item;
+        const img = mi.querySelector(".item-image");
+        if(!img) return;
+        img.src = pub("products", `products/${SLUG}/${id}.jpg`);
+        img.onerror = () => { img.src = "images/agua.jpg"; };
+      });
+    }
+
+    // ============ Aplicar nomes/preços do DB ============
+    async function applyNamesFromDB(){
+      try{
+        const { data, error } = await supabase
+          .from("menu_items")
+          .select("id,name,price")
+          .eq("restaurant_slug", SLUG);
+        if (error) throw error;
+        const map = new Map(data.map(d=>[String(d.id), d]));
+        $$(".menu-item").forEach(mi=>{
+          const id = mi.dataset.item;
+          const rec = map.get(String(id));
+          if(!rec) return;
+          mi.querySelector(".i-name").textContent = rec.name;
+          mi.querySelector(".i-price-text").textContent = fmt(rec.price).replace("R$","R$");
+          const btn = mi.querySelector(".add-to-cart");
+          if (btn){ btn.dataset.name = rec.name; btn.dataset.price = String(rec.price); }
+          // Preenche editores (para quando entrar no modo edição)
+          mi.querySelector(".ei-name").value = rec.name;
+          mi.querySelector(".ei-price").value = Number(rec.price||0);
+        });
+      }catch(e){ console.warn("[names/prices]", e.message); }
+    }
+
+    // ============ Carrinho ============
+    const loadCart = () => { try { return JSON.parse(localStorage.getItem(KEY)||"[]"); } catch { return []; } };
+    const saveCart = (c) => localStorage.setItem(KEY, JSON.stringify(c));
+    const countCart = (c) => c.reduce((a,i)=>a+(i.quantity||0),0);
+    const subtotal = (c) => c.reduce((a,i)=>a+(+i.price||0)*(+i.quantity||0),0);
+
+    function refreshBadges(){
+      const cart = loadCart();
+      $$(".cart-count,.cart-badge").forEach(b=> b.textContent = String(countCart(cart)));
+      const st = subtotal(cart);
+      $(".cart-total") && ($(".cart-total").textContent = fmt(st + DELIVERY));
+    }
+    function renderCartModal(){
+      const cart = loadCart();
+      const box = $(".cart-items");
+      if(!box) return;
+      box.innerHTML = cart.length ? cart.map(it=>`
+        <div class="cart-item">
+          <div class="item-details"><h4>${it.name}</h4><p>${fmt(it.price)}</p></div>
+          <div class="item-price">${fmt(it.price*it.quantity)}</div>
+          <div class="item-quantity">
+            <button class="quantity-btn minus" data-id="${it.id}">-</button>
+            <span class="quantity-value">${it.quantity}</span>
+            <button class="quantity-btn plus" data-id="${it.id}">+</button>
+          </div>
+          <div class="remove-item" data-id="${it.id}"><i class="fas fa-trash"></i></div>
+        </div>
+      `).join("") : `<p class="empty-cart">Seu carrinho está vazio</p>`;
+      const st = subtotal(cart);
+      $(".subtotal-amount").textContent = fmt(st);
+      $(".delivery-amount").textContent = fmt(DELIVERY);
+      $(".total-amount").textContent = fmt(st + DELIVERY);
+    }
+
+    function addToCart({id,name,price,restaurant_id}){
+      const cart = loadCart();
+      const found = cart.find(i=>i.id===id);
+      if(found) found.quantity += 1;
+      else cart.push({ id, name, price:+price, quantity:1, restaurant_id: restaurant_id||SLUG });
+      saveCart(cart); refreshBadges(); renderCartModal();
+    }
+    function changeQty(id,delta){
+      const cart = loadCart();
+      const it = cart.find(i=>i.id===id);
+      if(!it) return;
+      it.quantity += delta;
+      if(it.quantity<=0) cart.splice(cart.findIndex(i=>i.id===id),1);
+      saveCart(cart); refreshBadges(); renderCartModal();
+    }
+
+    document.addEventListener("click",(e)=>{
+      const btn = e.target.closest(".add-to-cart");
+      if(btn){
+        addToCart({
+          id: btn.dataset.id,
+          name: btn.dataset.name,
+          price: btn.dataset.price,
+          restaurant_id: btn.dataset.restaurant || SLUG
+        });
+      }
+      if(e.target.closest(".floating-cart")){
+        $(".cart-modal").style.display = "flex"; renderCartModal();
+      }
+      if(e.target.classList.contains("close-cart") || e.target.classList.contains("cart-modal")){
+        $(".cart-modal").style.display = "none";
+      }
+      if(e.target.closest(".plus"))  changeQty(e.target.closest(".plus").dataset.id, +1);
+      if(e.target.closest(".minus")) changeQty(e.target.closest(".minus").dataset.id, -1);
+      if(e.target.closest(".remove-item")){
+        const id = e.target.closest(".remove-item").dataset.id;
+        saveCart(loadCart().filter(i=> i.id !== id)); refreshBadges(); renderCartModal();
+      }
+      if(e.target.classList.contains("checkout-button")){
+        if(loadCart().length===0){ alert("Seu carrinho está vazio."); return; }
+        location.href = "checkout.html";
+      }
+    });
+
+    // ============ Modo edição (auth + policies) ============
+    async function canEditThisRestaurant(){
+      const { data: sess } = await supabase.auth.getSession();
+      const uid = sess?.session?.user?.id;
+      if(!uid) return null;
+      const { data, error } = await supabase.from("profiles").select("id,restaurant_slug").eq("id", uid).single();
+      if (error) return null;
+      return (data?.restaurant_slug === SLUG) ? data : null;
+    }
+
+    function toggleEditUI(on){
+      document.body.classList.toggle("edit-on", !!on);
+      $("#btn-toggle-edit").textContent = on ? "Desativar modo edição" : "Ativar modo edição";
+      // Mostra/oculta blocos .edit-actions
+      $$(".edit-actions").forEach(el => el.classList.toggle("hidden", !on));
+    }
+
+    async function uploadImage(path, file){
+      const { error } = await supabase.storage.from("products").upload(path, file, { upsert:true, cacheControl:"3600" });
+      if (error) throw error;
+      return supabase.storage.from("products").getPublicUrl(path).data.publicUrl;
+    }
+
+    // Eventos do modo edição (header + itens)
+    function wireEditEvents(){
+      // Header (capa/logo)
+      $("#btn-cover")?.addEventListener("click", async ()=>{
+        const f = $("#file-cover").files?.[0];
+        if(!f) return $("#header-msg").textContent = "Selecione uma imagem.";
+        $("#header-msg").textContent = "Enviando capa...";
+        try{
+          const url = await uploadImage(`restaurants/${SLUG}/cover.jpg`, f);
+          $(".restaurant-cover").style.backgroundImage = `url('${url}?t=${Date.now()}')`;
+          $("#header-msg").textContent = "Capa atualizada!";
+        }catch(e){ $("#header-msg").textContent = e.message; }
+      });
+      $("#btn-logo")?.addEventListener("click", async ()=>{
+        const f = $("#file-logo").files?.[0];
+        if(!f) return $("#header-msg").textContent = "Selecione uma imagem.";
+        $("#header-msg").textContent = "Enviando logo...";
+        try{
+          const url = await uploadImage(`restaurants/${SLUG}/logo.jpg`, f);
+          $(".restaurant-logo").style.backgroundImage = `url('${url}?t=${Date.now()}')`;
+          $("#header-msg").textContent = "Logo atualizada!";
+        }catch(e){ $("#header-msg").textContent = e.message; }
+      });
+
+      // Itens (salvar nome/preço + upload foto)
+      document.addEventListener("click", async (e)=>{
+        const card = e.target.closest(".menu-item"); if(!card) return;
+        const id = card.dataset.item;
+        const msg = card.querySelector(".i-msg");
+
+        if (e.target.classList.contains("btn-save")){
+          const name = card.querySelector(".ei-name").value.trim();
+          const price = Number(card.querySelector(".ei-price").value||0);
+          e.target.disabled = true; msg.textContent = "Salvando...";
+          try{
+            const { error } = await supabase.from("menu_items")
+              .upsert({ restaurant_slug: SLUG, id, name, price });
+            if (error) throw error;
+            // aplica no visual
+            card.querySelector(".i-name").textContent = name || "Item";
+            card.querySelector(".i-price-text").textContent = fmt(price);
+            const add = card.querySelector(".add-to-cart");
+            if (add){ add.dataset.name = name; add.dataset.price = String(price); }
+            msg.textContent = "Salvo!";
+          }catch(err){ msg.textContent = err.message; }
+          finally{ e.target.disabled = false; }
+        }
+
+        if (e.target.classList.contains("btn-upload")){
+          const file = card.querySelector(".ei-file").files?.[0];
+          if(!file){ msg.textContent = "Selecione uma imagem."; return; }
+          e.target.disabled = true; msg.textContent = "Enviando imagem...";
+          try{
+            const url = await uploadImage(`products/${SLUG}/${id}.jpg`, file);
+            const img = card.querySelector(".item-image");
+            img.src = url + `?t=${Date.now()}`;
+            msg.textContent = "Imagem atualizada!";
+          }catch(err){ msg.textContent = err.message; }
+          finally{ e.target.disabled = false; }
+        }
+      });
+    }
+
+    // Botões da editbar
+    $("#btn-toggle-edit")?.addEventListener("click", ()=>{
+      const on = !document.body.classList.contains("edit-on");
+      toggleEditUI(on);
+    });
+    $("#btn-signout")?.addEventListener("click", async ()=>{
+      await supabase.auth.signOut();
+      location.reload();
+    });
+
+    // ============ Boot ============
+    loadHeaderImages();
+    loadItemImages();
+    await applyNamesFromDB();
+
+    // Carrinho
+    document.addEventListener("DOMContentLoaded", refreshBadges);
+
+    // Permissão de edição?
+    const prof = await canEditThisRestaurant();
+    if (prof) {
+    // só aparece se logado e com restaurant_slug == SLUG
+    $("#editbar").style.display = "flex";
+    $("#eb-slug").textContent = SLUG;
+    toggleEditUI(false); // começa desligado
+    wireEditEvents();
+    } else {
+    // garante que fica oculto
+    $("#editbar").style.display = "none";
+    }
+
+    // se deslogar em qualquer lugar, some a barra imediatamente
+    supabase.auth.onAuthStateChange((_event, session) => {
+    if (!session) {
+        $("#editbar").style.display = "none";
+        document.body.classList.remove("edit-on");
+    }
+    });
+
+  </script>
 </body>
 </html>
